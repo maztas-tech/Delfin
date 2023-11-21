@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Database {
 
-    private ArrayList<Medlem> medlemArrayList = new ArrayList<>();
+    public ArrayList<Medlem> medlemArrayList = new ArrayList<>();
 
     public void registreMedlemmer(String fornavn, String efternavn, String adresse,
                                   String by, String mail, char køn,
