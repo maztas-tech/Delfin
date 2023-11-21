@@ -21,13 +21,14 @@ public class UserInterface {
     private char aktivitetsform;
     private char medlemstype;
     public void startProgram(){
+        System.out.println("Velkommen til Delfinen!");
         do {
             //TODO læs en CSV fil
             velkomst();
             try {
                 userChoice = Integer.parseInt(input.nextLine());
             }catch (InputMismatchException | NumberFormatException ime){
-                System.out.println("Must be an integer/number");
+                System.out.println("Skal være et tal!");
             }
 
             switch (userChoice){
@@ -41,7 +42,6 @@ public class UserInterface {
     private void velkomst(){
 
         System.out.println("""
-                Velkommen til Delfinen!
                 1. Registre et nyt medlem   \s
                 2. Vis medlemmer           \s
                 9. Afslut programmet
