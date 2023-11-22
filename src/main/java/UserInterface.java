@@ -1,7 +1,10 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 public class UserInterface {
+
+
     MedlemController medlemController = new MedlemController();
     Scanner input = new Scanner(System.in);
     private boolean isRunning = true;
@@ -72,10 +75,6 @@ public class UserInterface {
             System.out.print("Tilføj alder: ");
             alder = Integer.parseInt(input.nextLine());
 
-            //TODO Tilføj til metode der generer år og 4 random generede tal
-            System.out.print("Tilføj medlemsnummer: ");
-            medlemsnummer = Integer.parseInt(input.nextLine());
-
             System.out.print("Er brugeren i restance ? J/N: ");
             restance = Boolean.parseBoolean(input.nextLine().toUpperCase());
 
@@ -90,7 +89,7 @@ public class UserInterface {
                     P = Passiv medlemstype
                     Medlemstype A/P:\s""");
             medlemstype = input.nextLine().toUpperCase().charAt(0);
-
+            //TODO if statement -> hvis vores medlemsnummer allerede eksisterer skal den lave et nyt tal
             medlemController.registreMedlemmer(fornavn, efternavn, adresse,
                     by, mail, køn,
                     alder, medlemsnummer, restance, aktivitetsform, medlemstype);

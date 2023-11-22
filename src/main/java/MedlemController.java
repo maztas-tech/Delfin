@@ -5,13 +5,15 @@ public class MedlemController {
                                   String by, String mail, char køn,
                                   int alder, int medlemsnummer, boolean restance,
                                   char aktivitetsform, char medlemstype){
+
         db.registreMedlemmer(fornavn, efternavn, adresse,
                         by, mail, køn,
-                            alder, medlemsnummer, restance,
+                            alder,  restance,
                             aktivitetsform, medlemstype);
     }
 
     public void visMedlemmer(){
+
         db.visMedlemmer();
     }
 
