@@ -17,4 +17,8 @@ public class MedlemController {
         db.visMedlemmer();
     }
 
+    public void saveChanges(){
+        db.saveChanges();
+    }
+
 }

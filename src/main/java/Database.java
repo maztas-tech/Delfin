@@ -4,7 +4,7 @@ import java.util.*;
 public class Database {
     Random random = new Random();
     Date date = new Date();
-
+    FileHandler fileHandler = new FileHandler();
 
     public ArrayList<Medlem> medlemArrayList = new ArrayList<>();
     private Set<Integer> generedeMedlemsnumre = new HashSet<>();
@@ -20,7 +20,7 @@ public class Database {
             medlemsnummer = Integer.parseInt(sdf1.format(date ) + number1 + number2 + number3 + number4);
 
         }while(generedeMedlemsnumre.contains(medlemsnummer));
-        
+
         generedeMedlemsnumre.add(medlemsnummer);
         return medlemsnummer;
     }
@@ -42,4 +42,9 @@ public class Database {
             System.out.println(medlem);
         }
     }
+
+    public void saveChanges() {
+        fileHandler.printMedlemmer(medlemArrayList);
+    }
+
 }

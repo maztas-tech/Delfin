@@ -1,10 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
 public class UserInterface {
-
-
     MedlemController medlemController = new MedlemController();
     Scanner input = new Scanner(System.in);
     private boolean isRunning = true;
@@ -107,6 +104,7 @@ public class UserInterface {
     }
     private void stopProgrammet(){
         System.out.println("Programmet er hermed stoppet");
+        medlemController.saveChanges();
         //TODO tilføj medlemmerne til CSV filen
         isRunning = false;
     }
