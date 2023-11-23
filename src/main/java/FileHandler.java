@@ -53,6 +53,7 @@ public class FileHandler {
                     System.out.println("Lenght is not 11!");
                 }
             }
+            sc.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
 
