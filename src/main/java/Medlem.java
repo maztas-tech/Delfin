@@ -110,28 +110,39 @@ public class Medlem {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Fornavn: ");
+        //stringBuilder.append("Fornavn: ");
         stringBuilder.append(fornavn);
-        stringBuilder.append("\tEfternavn: ");
+        stringBuilder.append(";");
+        //stringBuilder.append(";\tEfternavn: ");
         stringBuilder.append(efternavn);
-        stringBuilder.append("\tAdresse: ");
+        stringBuilder.append(";");
+        //stringBuilder.append(";\tAdresse: ");
         stringBuilder.append(adresse);
-        stringBuilder.append("\tBy: ");
+        stringBuilder.append(";");
+        //stringBuilder.append(";\tBy: ");
         stringBuilder.append(by);
-        stringBuilder.append("\tMail: ");
+        stringBuilder.append(";");
+        //stringBuilder.append(";\tMail: ");
         stringBuilder.append(mail);
-        stringBuilder.append("\tKøn: ");
+        stringBuilder.append(";");
+        //stringBuilder.append(";\tKøn: ");
         stringBuilder.append(køn);
-        stringBuilder.append("\tAlder: ");
+        stringBuilder.append(";");
+        //stringBuilder.append(";\tAlder: ");
         stringBuilder.append(alder);
-        stringBuilder.append("\tMedlemsnummer: ");
+        stringBuilder.append(";");
+        //stringBuilder.append(";\tMedlemsnummer: ");
         stringBuilder.append(medlemsnummer);
-        stringBuilder.append("\tRestance: ");
+        stringBuilder.append(";");
+       // stringBuilder.append(";\tRestance: ");
         stringBuilder.append(restance);
-        stringBuilder.append("\tAktivitetsform: ");
+        stringBuilder.append(";");
+        //stringBuilder.append(";\tAktivitetsform: ");
         stringBuilder.append(aktivitetsform);
-        stringBuilder.append("\tMedlemstype: ");
+        stringBuilder.append(";");
+        //stringBuilder.append(";\tMedlemstype: ");
         stringBuilder.append(medlemstype);
+        stringBuilder.append(";");
         return stringBuilder.toString();
     }
 }

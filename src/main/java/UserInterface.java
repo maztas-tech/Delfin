@@ -15,16 +15,17 @@ public class UserInterface {
     private String mail;
     private char køn;
     private int alder;
-
     private int medlemsnummer;
     private boolean restance;
     private char aktivitetsform;
     private char medlemstype;
     public void startProgram(){
         System.out.println("Velkommen til Delfinen!");
+
         do {
             //TODO læs en CSV fil
             velkomst();
+            medlemController.loadFromFile();
             try {
                 userChoice = Integer.parseInt(input.nextLine());
             }catch (InputMismatchException | NumberFormatException ime){

@@ -21,4 +21,8 @@ public class MedlemController {
         db.saveChanges();
     }
 
+    public void loadFromFile(){
+        db.loadFromFile();
+    }
+
 }
