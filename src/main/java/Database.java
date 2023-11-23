@@ -1,14 +1,11 @@
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Database {
     Random random = new Random();
     Date date = new Date();
-
-
-
-    private Date date = new Date();
-    private Random random = new Random();
     FileHandler fileHandler = new FileHandler();
+
     public ArrayList<Medlem> medlemArrayList = new ArrayList<>();
     private Set<Integer> generedeMedlemsnumre = new HashSet<>();
 
