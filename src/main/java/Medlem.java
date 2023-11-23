@@ -7,8 +7,7 @@ public class Medlem {
     private String mail;
     private final char køn;
     private final int alder;
-
-    private final int medlemsnummer;
+    private int medlemsnummer;
     private boolean restance;
     private char aktivitetsform;
     private char medlemstype;

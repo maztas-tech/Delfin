@@ -1,13 +1,17 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class UserInterface {
+    Date date = new Date();
+    Random random = new Random();
     MedlemController medlemController = new MedlemController();
     Scanner input = new Scanner(System.in);
     private boolean isRunning = true;
     private int userChoice;
     private boolean memberVerified = true;
-
     private String fornavn;
     private String efternavn;
     private String adresse;
@@ -15,31 +19,32 @@ public class UserInterface {
     private String mail;
     private char køn;
     private int alder;
-
     private int medlemsnummer;
     private boolean restance;
     private char aktivitetsform;
     private char medlemstype;
-    public void startProgram(){
+
+    public void startProgram() {
         System.out.println("Velkommen til Delfinen!");
         do {
             //TODO læs en CSV fil
             velkomst();
             try {
                 userChoice = Integer.parseInt(input.nextLine());
-            }catch (InputMismatchException | NumberFormatException ime){
+            } catch (InputMismatchException | NumberFormatException ime) {
                 System.out.println("Skal være et tal!");
             }
 
-            switch (userChoice){
+            switch (userChoice) {
                 case 1 -> registreMedlemmer();
                 case 2 -> visMedlemmer();
+                case 3 -> medlemsGenerator();
                 case 9 -> stopProgrammet();
             }
-        }while (isRunning);
+        } while (isRunning);
     }
 
-    private void velkomst(){
+    private void velkomst() {
 
         System.out.println("""
                 1. Registre et nyt medlem   \s
@@ -48,7 +53,11 @@ public class UserInterface {
                 """);
     }
 
-    private void registreMedlemmer(){
+    public void medlemsGenerator(){
+        medlemController.medlemsGenerator();
+    }
+
+    private void registreMedlemmer() {
         do {
             //TODO lav en try catch så der ikke kommer forkert input
             System.out.print("Tilføj fornavn: ");
@@ -74,7 +83,7 @@ public class UserInterface {
 
             //TODO Tilføj til metode der generer år og 4 random generede tal
             System.out.print("Tilføj medlemsnummer: ");
-            medlemsnummer = Integer.parseInt(input.nextLine());
+            medlemController.medlemsGenerator();
 
             System.out.print("Er brugeren i restance ? J/N: ");
             restance = Boolean.parseBoolean(input.nextLine().toUpperCase());
@@ -98,16 +107,18 @@ public class UserInterface {
             System.out.println("Medlem er blevet tilføjet!");
 
             memberVerified = false;
-        }while(memberVerified);
+        } while (memberVerified);
     }
 
-    private void visMedlemmer(){
+    private void visMedlemmer() {
         //TODO indlæs medlemmer fra CSV fil
         System.out.println("Liste af alle medlemmer");
         medlemController.visMedlemmer();
     }
-    private void stopProgrammet(){
+
+    private void stopProgrammet() {
         System.out.println("Programmet er hermed stoppet");
+        medlemController.saveChanges();
         //TODO tilføj medlemmerne til CSV filen
         isRunning = false;
     }
