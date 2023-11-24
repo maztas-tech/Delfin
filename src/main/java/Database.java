@@ -27,7 +27,7 @@ public class Database {
 
     public void registreMedlemmer(String fornavn, String efternavn, String adresse,
                                   String by, String mail, char køn,
-                                  int alder, boolean restance,
+                                  int alder, String restance,
                                   char aktivitetsform, char medlemstype) {
 
 

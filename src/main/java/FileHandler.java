@@ -43,7 +43,7 @@ public class FileHandler {
                     char køn = antalAttributes[5].trim().charAt(0);
                     int alder = Integer.parseInt(antalAttributes[6].trim());
                     int medlemsnummer = Integer.parseInt(antalAttributes[7].trim());
-                    boolean restance = Boolean.parseBoolean(antalAttributes[8].trim());
+                    String restance = antalAttributes[8].trim();
                     char aktivitetsform = antalAttributes[9].trim().charAt(0);
                     char medlemstype = antalAttributes[10].trim().charAt(0);
 

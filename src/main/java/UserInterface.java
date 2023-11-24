@@ -16,7 +16,7 @@ public class UserInterface {
     private char køn;
     private int alder;
     private int medlemsnummer;
-    private boolean restance;
+    private String restance;
     private char aktivitetsform;
     private char medlemstype;
 
@@ -50,43 +50,138 @@ public class UserInterface {
     }
 
     private void registreMedlemmer() {
-        do {
-            //TODO lav en try catch så der ikke kommer forkert input
+        while (memberVerified){
             System.out.print("Tilføj fornavn: ");
-            fornavn = input.nextLine();
+            try {
+                fornavn = input.nextLine();
+                if (!fornavn.matches("[a-zA-Z]+")){
+                    throw new Exception();
+                }
+            }catch (Exception e){
+                System.out.println("Skal være bogstaver!");
+                continue;
+            }
+            break;
+        }
 
+        while (memberVerified){
             System.out.print("Tilføj efternavn: ");
-            efternavn = input.nextLine();
+            try {
+                efternavn = input.nextLine();
+                if (!efternavn.matches("[a-zA-Z]+")){
+                    throw new Exception();
+                }
+            }catch (Exception e){
+                System.out.println("Skal være bogstaver!");
+                continue;
+            }
+            break;
+        }
 
+        while (memberVerified){
             System.out.print("Tilføj adresse: ");
             adresse = input.nextLine();
+            break;
+        }
 
+        while (memberVerified){
             System.out.print("Tilføj by: ");
             by = input.nextLine();
+            break;
+        }
 
+        while (memberVerified){
             System.out.print("Tilføj mail: ");
-            mail = input.nextLine();
+            try {
+                mail = input.nextLine();
+                if (!mail.matches("^[A-Za-z0-9+_.-]+@(.+)$")){
+                    throw new Exception();
+                }
+            }catch (Exception e){
+                System.out.println("Ikke en rigtig mail!");
+                continue;
+            }
+            break;
+        }
 
+        while (memberVerified){
             System.out.print("Tilføj køn M/K: ");
-            køn = input.nextLine().toUpperCase().charAt(0);
+            try {
+                køn = input.nextLine().toUpperCase().charAt(0);
+                if (køn != 'M' && køn != 'K'){
+                    throw new Exception();
+                }
+            }catch (Exception e){
+                System.out.println("Tast M eller K");
+                continue;
+            }
+            break;
+        }
 
-            System.out.print("Tilføj alder: ");
-            alder = Integer.parseInt(input.nextLine());
+        while (memberVerified){
+            System.out.print("Tilføj alder ");
+            try {
+                alder = Integer.parseInt(input.nextLine());
+            }catch (NumberFormatException nfe){
+                System.out.println("Skal være et tal!");
+                continue;
+            }
+            break;
+        }
 
-            System.out.print("Er brugeren i restance ? J/N: ");
-            restance = Boolean.parseBoolean(input.nextLine().toUpperCase());
 
+        while (memberVerified){
+            System.out.print("Er brugeren i restance ? Ja/Nej: ");
+            try {
+                restance = input.nextLine().toUpperCase();
+                if (!restance.equals("JA") && !restance.equals("NEJ")){
+                    throw new Exception();
+                }
+            }catch (Exception e){
+                System.out.println("Tast ja eller nej");
+                continue;
+            }
+            break;
+        }
+
+        while (memberVerified){
             System.out.print("""
                     M = Motionist
                     K = Konkurrencesvømmer
                     Aktivitetsform M/K:\s""");
-            aktivitetsform = input.nextLine().toUpperCase().charAt(0);
+            try {
+                aktivitetsform = input.nextLine().toUpperCase().charAt(0);
+                if (aktivitetsform != 'M' && aktivitetsform != 'K'){
+                    throw new Exception();
+                }
+            }catch (Exception e){
+                System.out.println("Tast M eller K");
+                continue;
+            }
+            break;
+        }
 
+        while (memberVerified){
             System.out.print("""
-                    A = Aktiv medlemstype
-                    P = Passiv medlemstype
-                    Medlemstype A/P:\s""");
-            medlemstype = input.nextLine().toUpperCase().charAt(0);
+                    A = Aktiv
+                    K = Passiv
+                    Medlemstype:\s""");
+            try {
+                medlemstype = input.nextLine().toUpperCase().charAt(0);
+                if (medlemstype != 'A' && medlemstype != 'P'){
+                    throw new Exception();
+                }
+            }catch (Exception e){
+                System.out.println("Tast P eller A");
+                continue;
+            }
+            break;
+        }
+
+
+
+
+
             //TODO if statement -> hvis vores medlemsnummer allerede eksisterer skal den lave et nyt tal
             medlemController.registreMedlemmer(fornavn, efternavn, adresse,
                     by, mail, køn,
@@ -95,7 +190,7 @@ public class UserInterface {
             System.out.println("Medlem er blevet tilføjet!");
 
             memberVerified = false;
-        } while (memberVerified);
+
     }
 
     private void visMedlemmer() {

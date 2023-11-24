@@ -17,11 +17,11 @@ class DatabaseTest {
         //Arrange
         db.registreMedlemmer("Anders", "Mogens", "Farumhovedgade",
                 "Farum", "andersm@gmail.com", 'M',
-                40, true, 'A', 'M');
+                40, "Ja", 'A', 'M');
 
         db.registreMedlemmer("Anders", "Mogens", "Farumhovedgade",
                 "Farum", "andersm@gmail.com", 'M',
-                40, false, 'A', 'M');
+                40, "Nej", 'A', 'M');
 
         //Act
         int actualResult = db.medlemArrayList.size();
@@ -34,9 +34,18 @@ class DatabaseTest {
     @Test
     void medlemsnummerGenerator() {
         //Arrange
-        generedeMedlemsnumre.add(123);
+        int number1 = 123;
+        int number2 = 123;
+
         //Act
-        generedeMedlemsnumre.equals(123);
+        generedeMedlemsnumre.add(number1);
+        generedeMedlemsnumre.add(number2);
+
         //Assert
+        int actualSize = generedeMedlemsnumre.size();
+        int expectedSize = 1;
+
+        assertEquals(actualSize, expectedSize);
+
     }
 }

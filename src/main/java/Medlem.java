@@ -10,14 +10,14 @@ public class Medlem {
     private final char køn;
     private final int alder;
     private int medlemsnummer;
-    private boolean restance;
+    private String restance;
     private char aktivitetsform;
     private char medlemstype;
 
     //Konstruktor
     public Medlem(String fornavn, String efternavn, String adresse,
                   String by, String mail, char køn,
-                  int alder, int medlemsnummer, boolean restance,
+                  int alder, int medlemsnummer, String restance,
                   char aktivitetsform, char medlemstype) {
         this.fornavn = fornavn;
         this.efternavn = efternavn;
@@ -80,7 +80,7 @@ public class Medlem {
         return medlemsnummer;
     }
 
-    public boolean isRestance() {
+    public String getRestance() {
         return restance;
     }
 
@@ -113,7 +113,7 @@ public class Medlem {
         this.mail = mail;
     }
 
-    public void setRestance(boolean restance) {
+    public void setRestance(String restance) {
         this.restance = restance;
     }
 
@@ -160,7 +160,6 @@ public class Medlem {
         stringBuilder.append(";");
         //stringBuilder.append(";\tMedlemstype: ");
         stringBuilder.append(medlemstype);
-        stringBuilder.append(";");
         return stringBuilder.toString();
     }
 }

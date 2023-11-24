@@ -6,7 +6,7 @@ public class MedlemController {
 
     public void registreMedlemmer(String fornavn, String efternavn, String adresse,
                                   String by, String mail, char køn,
-                                  int alder, int medlemsnummer, boolean restance,
+                                  int alder, int medlemsnummer, String restance,
                                   char aktivitetsform, char medlemstype) {
         isChanged = true;
         db.registreMedlemmer(fornavn, efternavn, adresse,
