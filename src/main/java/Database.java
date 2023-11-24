@@ -48,12 +48,15 @@ public class Database {
     }
 
     public void loadFromFile() {
-        ArrayList<Medlem>loadedMedlemArrayList = fileHandler.loadFromFile();
-       if (loadedMedlemArrayList != null){
-           medlemArrayList.addAll(loadedMedlemArrayList);
-       }else {
-           System.out.println("Ingen gemte medlemmer.");
-       }
+        ArrayList<Medlem> loadedMedlemArrayList;
+        loadedMedlemArrayList = fileHandler.loadFromFile();
+        if (loadedMedlemArrayList != null) {
+            //medlemArrayList.clear();
+            medlemArrayList.addAll(loadedMedlemArrayList);
+            //loadedMedlemArrayList.clear();
+        } else {
+            System.out.println("Ingen gemte medlemmer.");
+        }
     }
 }
 

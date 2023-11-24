@@ -56,7 +56,6 @@ public class FileHandler {
             sc.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-
         }
     return medlemArrayList;
     }

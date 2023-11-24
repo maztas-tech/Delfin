@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Medlem {
     //Attributer
     private String fornavn;
@@ -29,6 +31,22 @@ public class Medlem {
         this.aktivitetsform = aktivitetsform;
         this.medlemstype = medlemstype;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Medlem medlem = (Medlem) o;
+        return køn == medlem.køn && alder == medlem.alder && medlemsnummer == medlem.medlemsnummer && restance == medlem.restance && aktivitetsform == medlem.aktivitetsform && medlemstype == medlem.medlemstype && Objects.equals(fornavn, medlem.fornavn) && Objects.equals(efternavn, medlem.efternavn) && Objects.equals(adresse, medlem.adresse) && Objects.equals(by, medlem.by) && Objects.equals(mail, medlem.mail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fornavn, efternavn, adresse, by, mail, køn, alder, medlemsnummer, restance, aktivitetsform, medlemstype);
+    }
+
     //Getter
     public String getFornavn() {
         return fornavn;

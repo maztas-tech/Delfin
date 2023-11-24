@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,7 +8,6 @@ public class UserInterface {
     private boolean isRunning = true;
     private int userChoice;
     private boolean memberVerified = true;
-
     private String fornavn;
     private String efternavn;
     private String adresse;
@@ -19,28 +19,28 @@ public class UserInterface {
     private boolean restance;
     private char aktivitetsform;
     private char medlemstype;
-    public void startProgram(){
-        System.out.println("Velkommen til Delfinen!");
 
+    public void startProgram() {
+        System.out.println("Velkommen til Delfinen!");
+        medlemController.loadFromFile();
         do {
             //TODO læs en CSV fil
             velkomst();
-            medlemController.loadFromFile();
             try {
                 userChoice = Integer.parseInt(input.nextLine());
-            }catch (InputMismatchException | NumberFormatException ime){
+            } catch (InputMismatchException | NumberFormatException ime) {
                 System.out.println("Skal være et tal!");
             }
 
-            switch (userChoice){
+            switch (userChoice) {
                 case 1 -> registreMedlemmer();
                 case 2 -> visMedlemmer();
                 case 9 -> stopProgrammet();
             }
-        }while (isRunning);
+        } while (isRunning);
     }
 
-    private void velkomst(){
+    private void velkomst() {
 
         System.out.println("""
                 1. Registre et nyt medlem   \s
@@ -49,7 +49,7 @@ public class UserInterface {
                 """);
     }
 
-    private void registreMedlemmer(){
+    private void registreMedlemmer() {
         do {
             //TODO lav en try catch så der ikke kommer forkert input
             System.out.print("Tilføj fornavn: ");
@@ -95,18 +95,19 @@ public class UserInterface {
             System.out.println("Medlem er blevet tilføjet!");
 
             memberVerified = false;
-        }while(memberVerified);
+        } while (memberVerified);
     }
 
-    private void visMedlemmer(){
+    private void visMedlemmer() {
         //TODO indlæs medlemmer fra CSV fil
         System.out.println("Liste af alle medlemmer");
         medlemController.visMedlemmer();
     }
-    private void stopProgrammet(){
+
+
+    private void stopProgrammet() {
         System.out.println("Programmet er hermed stoppet");
-        medlemController.saveChanges();
-        //TODO tilføj medlemmerne til CSV filen
+        medlemController.exit();
         isRunning = false;
     }
 }
