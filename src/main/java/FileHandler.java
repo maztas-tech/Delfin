@@ -18,11 +18,11 @@ public class FileHandler {
                 if (medlem != null) {
                     output.println(medlem);
                 } else {
-                    System.out.println("There is no hero registered.");
+                    System.out.println("Der er ingen medlemmer i klubben!");
                 }
             }
         } catch (FileNotFoundException fnfe) {
-            System.out.println("File is not found!");
+            System.out.println("Filen eksister ikke!");
         }
     }
 
@@ -50,7 +50,7 @@ public class FileHandler {
                     Medlem member = new Medlem(fornavn, efternavn, adresse, by, mail, køn, alder, medlemsnummer, restance, aktivitetsform, medlemstype);
                     medlemArrayList.add(member);
                 }else {
-                    System.out.println("Lenght is not 11!");
+                    System.out.println("Længden skal være 11!");
                 }
             }
             sc.close();
