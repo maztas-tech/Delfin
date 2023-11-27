@@ -11,7 +11,6 @@ public class FileHandler {
     private File f = new File("Medlemsregister.csv");
 
     public void printMedlemmer(ArrayList<Medlem> medlemArrayList) {
-
         try {
             PrintStream output = new PrintStream(f);
             for (Medlem medlem : medlemArrayList) {

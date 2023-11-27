@@ -36,14 +36,16 @@ class DatabaseTest {
         //Arrange
         int number1 = 123;
         int number2 = 123;
+        int number3 = 321;
 
         //Act
         generedeMedlemsnumre.add(number1);
         generedeMedlemsnumre.add(number2);
+        generedeMedlemsnumre.add(number3);
 
         //Assert
         int actualSize = generedeMedlemsnumre.size();
-        int expectedSize = 1;
+        int expectedSize = 2;
 
         assertEquals(actualSize, expectedSize);
 
