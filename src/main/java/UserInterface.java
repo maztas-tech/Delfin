@@ -191,7 +191,6 @@ public class UserInterface {
     }
 
     private void visMedlemmer() {
-        //TODO indlæs medlemmer fra CSV fil
         ArrayList<Medlem> medlemArrayList = medlemController.visMedlemmer();
         System.out.println("Liste af alle medlemmer");
         for (Medlem medlem : medlemArrayList) {
