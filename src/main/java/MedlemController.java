@@ -15,8 +15,8 @@ public class MedlemController {
                 aktivitetsform, medlemstype);
     }
 
-    public void visMedlemmer() {
-        db.visMedlemmer();
+    public ArrayList<Medlem> visMedlemmer() {
+        return db.visMedlemmer();
     }
 
     public void saveChanges() {

@@ -48,6 +48,7 @@ public class UserInterface {
                 9. Afslut programmet
                 """);
     }
+
     private void registreMedlemmer() {
         while (true) {
             System.out.print("Tilføj fornavn: ");
@@ -153,9 +154,9 @@ public class UserInterface {
         }
         while (true) {
             System.out.print("""
-                M = Motionist
-                K = Konkurrencesvømmer
-                Aktivitetsform M/K:\s""");
+                    M = Motionist
+                    K = Konkurrencesvømmer
+                    Aktivitetsform M/K:\s""");
             try {
                 aktivitetsform = input.nextLine().toUpperCase().charAt(0);
                 if (aktivitetsform != 'M' && aktivitetsform != 'K') {
@@ -169,9 +170,9 @@ public class UserInterface {
         }
         while (true) {
             System.out.print("""
-                A = Aktiv
-                P = Passiv
-                Medlemstype:\s""");
+                    A = Aktiv
+                    P = Passiv
+                    Medlemstype:\s""");
             try {
                 medlemstype = input.nextLine().toUpperCase().charAt(0);
                 if (medlemstype != 'A' && medlemstype != 'P') {
@@ -191,8 +192,22 @@ public class UserInterface {
 
     private void visMedlemmer() {
         //TODO indlæs medlemmer fra CSV fil
+        ArrayList<Medlem> medlemArrayList = medlemController.visMedlemmer();
         System.out.println("Liste af alle medlemmer");
-        medlemController.visMedlemmer();
+        for (Medlem medlem : medlemArrayList) {
+            System.out.println("");
+            System.out.println(
+                            "Fornavn: " + medlem.getFornavn() + ", " +
+                            "Efternavn: " + medlem.getEfternavn() + ", " +
+                            "Adresse: " + medlem.getAdresse() + ", " +
+                            "By: " + medlem.getBy() + ", " +
+                            "Mail: " + medlem.getMail() + ", " +
+                            "Køn (M/K): " + medlem.getKøn() + ", " +
+                            "Alder: " + medlem.getAlder() + ", " +
+                            "Medlemsnummer: " + medlem.getMedlemsnummer() + ", " +
+                            "Aktivitetsform: " + medlem.getAktivitetsform() + ", " +
+                            "Medlemstype: " + medlem.getMedlemstype());
+        }
     }
 
 

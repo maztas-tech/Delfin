@@ -37,10 +37,8 @@ public class Database {
                 by, mail, køn, alder, medlemsnummer, restance, aktivitetsform, medlemstype));
     }
 
-    public void visMedlemmer() {
-        for (Medlem medlem : medlemArrayList) {
-            System.out.println(medlem);
-        }
+    public ArrayList<Medlem>visMedlemmer() {
+        return medlemArrayList;
     }
 
     public void saveChanges() {
