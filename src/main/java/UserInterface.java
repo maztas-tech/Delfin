@@ -201,9 +201,10 @@ public class UserInterface {
             System.out.println("Skal være et tal!");
         }
 
+        ArrayList<Medlem> medlemArrayList = medlemController.visMedlemmer();
         switch (userChoice){
+
             case 1:
-                ArrayList<Medlem> medlemArrayList = medlemController.visMedlemmer();
                 System.out.println("Liste af alle medlemmer");
                 for (Medlem medlem : medlemArrayList) {
                     System.out.println("");
@@ -222,10 +223,44 @@ public class UserInterface {
                 }
                 break;
             case 2:
-                System.out.println("Junior hold");
+                //Printer Junior holdet ud på skærmen
+                System.out.println("Liste af alle medlemmer i junior hold");
+                for (Medlem medlem: medlemArrayList) {
+                    System.out.println("");
+                    if (medlem.getAlder() < 18 && medlem.getAktivitetsform() == 'K'){
+                        System.out.println("Fornavn: " + medlem.getFornavn() + ", " +
+                                "Efternavn: " + medlem.getEfternavn() + ", " +
+                                "Adresse: " + medlem.getAdresse() + ", " +
+                                "By: " + medlem.getBy() + ", " +
+                                "Mail: " + medlem.getMail() + ", " +
+                                "Køn (M/K): " + medlem.getKøn() + ", " +
+                                "Alder: " + medlem.getAlder() + ", " +
+                                "Restance: " + medlem.getRestance() + ", " +
+                                "Medlemsnummer: " + medlem.getMedlemsnummer() + ", " +
+                                "Aktivitetsform: " + medlem.getAktivitetsform() + ", " +
+                                "Medlemstype: " + medlem.getMedlemstype());
+                    }
+                }
                 break;
             case 3:
+                //Printer Senior holdet ud på skærmen
                 System.out.println("Senior hold");
+                for (Medlem medlem: medlemArrayList) {
+                    System.out.println("");
+                    if (medlem.getAlder() > 18 && medlem.getAktivitetsform() == 'K') {
+                        System.out.println("Fornavn: " + medlem.getFornavn() + ", " +
+                                "Efternavn: " + medlem.getEfternavn() + ", " +
+                                "Adresse: " + medlem.getAdresse() + ", " +
+                                "By: " + medlem.getBy() + ", " +
+                                "Mail: " + medlem.getMail() + ", " +
+                                "Køn (M/K): " + medlem.getKøn() + ", " +
+                                "Alder: " + medlem.getAlder() + ", " +
+                                "Restance: " + medlem.getRestance() + ", " +
+                                "Medlemsnummer: " + medlem.getMedlemsnummer() + ", " +
+                                "Aktivitetsform: " + medlem.getAktivitetsform() + ", " +
+                                "Medlemstype: " + medlem.getMedlemstype());
+                    }
+                }
                 break;
 
         }
@@ -241,3 +276,4 @@ public class UserInterface {
         isRunning = false;
     }
 }
+

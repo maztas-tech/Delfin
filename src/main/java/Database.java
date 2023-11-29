@@ -41,11 +41,13 @@ public class Database {
         return medlemArrayList;
     }
 
-    public void saveChanges() {
+    public void gemÆndringer() {
         fileHandler.indsætMedlemmer(medlemArrayList);
         fileHandler.indsætJuniorMedlem(medlemArrayList);
         fileHandler.indsætSeniorMedlem(medlemArrayList);
     }
+
+
 
     public void loadFromFile() {
         ArrayList<Medlem> loadedMedlemArrayList;

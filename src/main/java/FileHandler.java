@@ -32,7 +32,7 @@ public class FileHandler {
         try {
             PrintStream juniorOutput = new PrintStream(juniorFile);
             for (Medlem medlem : medlemArrayList) {
-                if (medlem.getAlder() < 18) {
+                if (medlem.getAlder() < 18 && medlem.getAktivitetsform() == 'K') {
                     juniorOutput.println(medlem);
                 }else {
                     System.out.println("Ingen under 18");
@@ -48,7 +48,7 @@ public class FileHandler {
         try {
             PrintStream seniorOutput = new PrintStream(seniorFile);
             for (Medlem medlem : medlemArrayList) {
-                if (medlem.getAlder() >= 18) {
+                if (medlem.getAlder() >= 18 && medlem.getAktivitetsform() == 'K') {
                     seniorOutput.println(medlem);
                 } else {
                     System.out.println("Ingen over 18!");

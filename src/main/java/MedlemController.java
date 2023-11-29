@@ -20,17 +20,18 @@ public class MedlemController {
     }
 
     public void saveChanges() {
-        db.saveChanges();
+        db.gemÆndringer();
     }
 
     public void loadFromFile() {
         db.loadFromFile();
+
     }
 
 
     public void exit() {
         if (isChanged == true) {
-            db.saveChanges();
+            db.gemÆndringer();
         }
     }
 }
