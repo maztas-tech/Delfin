@@ -196,13 +196,14 @@ public class UserInterface {
         for (Medlem medlem : medlemArrayList) {
             System.out.println("");
             System.out.println(
-                            "Fornavn: " + medlem.getFornavn() + ", " +
+                    "Fornavn: " + medlem.getFornavn() + ", " +
                             "Efternavn: " + medlem.getEfternavn() + ", " +
                             "Adresse: " + medlem.getAdresse() + ", " +
                             "By: " + medlem.getBy() + ", " +
                             "Mail: " + medlem.getMail() + ", " +
                             "Køn (M/K): " + medlem.getKøn() + ", " +
                             "Alder: " + medlem.getAlder() + ", " +
+                            "Restance: " + medlem.getRestance() + ", " +
                             "Medlemsnummer: " + medlem.getMedlemsnummer() + ", " +
                             "Aktivitetsform: " + medlem.getAktivitetsform() + ", " +
                             "Medlemstype: " + medlem.getMedlemstype());

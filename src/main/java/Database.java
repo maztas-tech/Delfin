@@ -37,7 +37,7 @@ public class Database {
                 by, mail, køn, alder, medlemsnummer, restance, aktivitetsform, medlemstype));
     }
 
-    public ArrayList<Medlem>visMedlemmer() {
+    public ArrayList<Medlem> visMedlemmer() {
         return medlemArrayList;
     }
 
