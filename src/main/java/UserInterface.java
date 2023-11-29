@@ -210,6 +210,10 @@ public class UserInterface {
         }
     }
 
+    private void visTrænerensKonkurrenceHold() {
+        medlemController.visTrænerensKonkurrenceHold();
+    }
+
 
     private void stopProgrammet() {
         System.out.println("Programmet er hermed stoppet");

@@ -27,6 +27,10 @@ public class MedlemController {
         db.loadFromFile();
     }
 
+    public void visTrænerensKonkurrenceHold(){
+
+    }
+
     public void exit() {
         if (isChanged == true) {
             db.saveChanges();
