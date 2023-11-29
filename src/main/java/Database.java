@@ -43,6 +43,8 @@ public class Database {
 
     public void saveChanges() {
         fileHandler.indsætMedlemmer(medlemArrayList);
+        fileHandler.indsætJuniorMedlem(medlemArrayList);
+        fileHandler.indsætSeniorMedlem(medlemArrayList);
     }
 
     public void loadFromFile() {

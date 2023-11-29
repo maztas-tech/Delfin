@@ -24,7 +24,38 @@ public class FileHandler {
 
             }
         } catch (FileNotFoundException fnfe) {
-            System.out.println("Filen eksister ikke!");
+            System.out.println("Filen eksisterer ikke!");
+        }
+    }
+
+    public void indsætJuniorMedlem(ArrayList<Medlem> medlemArrayList) {
+        try {
+            PrintStream juniorOutput = new PrintStream(juniorFile);
+            for (Medlem medlem : medlemArrayList) {
+                if (medlem.getAlder() < 18) {
+                    juniorOutput.println(medlem);
+                }else {
+                    System.out.println("Ingen under 18");
+                }
+            }
+
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("Filen eksisterer ikke!");
+        }
+    }
+
+    public void indsætSeniorMedlem(ArrayList<Medlem> medlemArrayList) {
+        try {
+            PrintStream seniorOutput = new PrintStream(seniorFile);
+            for (Medlem medlem : medlemArrayList) {
+                if (medlem.getAlder() >= 18) {
+                    seniorOutput.println(medlem);
+                } else {
+                    System.out.println("Ingen over 18!");
+                }
+            }
+        } catch (FileNotFoundException fnfe) {
+            fnfe.printStackTrace();
         }
     }
 
