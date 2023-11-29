@@ -191,6 +191,8 @@ public class UserInterface {
     }
 
     private void visMedlemmer() {
+
+
         ArrayList<Medlem> medlemArrayList = medlemController.visMedlemmer();
         System.out.println("Liste af alle medlemmer");
         for (Medlem medlem : medlemArrayList) {
