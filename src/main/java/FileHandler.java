@@ -12,7 +12,7 @@ public class FileHandler {
     private File juniorFile = new File("juniorHoldet.csv");
     private File seniorFile = new File("seniorHoldet.csv");
 
-    public void printMedlemmer(ArrayList<Medlem> medlemArrayList) {
+    public void indsætMedlemmer(ArrayList<Medlem> medlemArrayList) {
         try {
             PrintStream output = new PrintStream(medlemsregisterFile);
             for (Medlem medlem : medlemArrayList) {
@@ -27,7 +27,7 @@ public class FileHandler {
         }
     }
 
-    public ArrayList<Medlem> loadFromFile() {
+    public ArrayList<Medlem> indlæsFraCSVFil() {
 
         ArrayList<Medlem> medlemArrayList = new ArrayList<>();
         try {

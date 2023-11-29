@@ -42,12 +42,12 @@ public class Database {
     }
 
     public void saveChanges() {
-        fileHandler.printMedlemmer(medlemArrayList);
+        fileHandler.indsætMedlemmer(medlemArrayList);
     }
 
     public void loadFromFile() {
         ArrayList<Medlem> loadedMedlemArrayList;
-        loadedMedlemArrayList = fileHandler.loadFromFile();
+        loadedMedlemArrayList = fileHandler.indlæsFraCSVFil();
         if (loadedMedlemArrayList != null) {
             //medlemArrayList.clear();
             medlemArrayList.addAll(loadedMedlemArrayList);
