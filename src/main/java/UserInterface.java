@@ -191,25 +191,47 @@ public class UserInterface {
     }
 
     private void visMedlemmer() {
-
-
-        ArrayList<Medlem> medlemArrayList = medlemController.visMedlemmer();
-        System.out.println("Liste af alle medlemmer");
-        for (Medlem medlem : medlemArrayList) {
-            System.out.println("");
-            System.out.println(
-                    "Fornavn: " + medlem.getFornavn() + ", " +
-                            "Efternavn: " + medlem.getEfternavn() + ", " +
-                            "Adresse: " + medlem.getAdresse() + ", " +
-                            "By: " + medlem.getBy() + ", " +
-                            "Mail: " + medlem.getMail() + ", " +
-                            "Køn (M/K): " + medlem.getKøn() + ", " +
-                            "Alder: " + medlem.getAlder() + ", " +
-                            "Restance: " + medlem.getRestance() + ", " +
-                            "Medlemsnummer: " + medlem.getMedlemsnummer() + ", " +
-                            "Aktivitetsform: " + medlem.getAktivitetsform() + ", " +
-                            "Medlemstype: " + medlem.getMedlemstype());
+        System.out.println("""
+                1: Vis alle medlemmer
+                2: Vis junior hold
+                3: Vis senior hold""");
+        try {
+            userChoice = Integer.parseInt(input.nextLine());
+        } catch (InputMismatchException | NumberFormatException ime) {
+            System.out.println("Skal være et tal!");
         }
+
+        switch (userChoice){
+            case 1:
+                ArrayList<Medlem> medlemArrayList = medlemController.visMedlemmer();
+                System.out.println("Liste af alle medlemmer");
+                for (Medlem medlem : medlemArrayList) {
+                    System.out.println("");
+                    System.out.println(
+                            "Fornavn: " + medlem.getFornavn() + ", " +
+                                    "Efternavn: " + medlem.getEfternavn() + ", " +
+                                    "Adresse: " + medlem.getAdresse() + ", " +
+                                    "By: " + medlem.getBy() + ", " +
+                                    "Mail: " + medlem.getMail() + ", " +
+                                    "Køn (M/K): " + medlem.getKøn() + ", " +
+                                    "Alder: " + medlem.getAlder() + ", " +
+                                    "Restance: " + medlem.getRestance() + ", " +
+                                    "Medlemsnummer: " + medlem.getMedlemsnummer() + ", " +
+                                    "Aktivitetsform: " + medlem.getAktivitetsform() + ", " +
+                                    "Medlemstype: " + medlem.getMedlemstype());
+                }
+                break;
+            case 2:
+                System.out.println("Junior hold");
+                break;
+            case 3:
+                System.out.println("Senior hold");
+                break;
+
+        }
+
+
+
     }
 
 
