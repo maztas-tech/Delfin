@@ -8,11 +8,13 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-    private File f = new File("Medlemsregister.csv");
+    private File medlemsregisterFile = new File("Medlemsregister.csv");
+    private File juniorFile = new File("juniorHoldet.csv");
+    private File seniorFile = new File("seniorHoldet.csv");
 
     public void printMedlemmer(ArrayList<Medlem> medlemArrayList) {
         try {
-            PrintStream output = new PrintStream(f);
+            PrintStream output = new PrintStream(medlemsregisterFile);
             for (Medlem medlem : medlemArrayList) {
                 if (medlem != null) {
                     output.println(medlem);
@@ -29,7 +31,7 @@ public class FileHandler {
 
         ArrayList<Medlem> medlemArrayList = new ArrayList<>();
         try {
-            Scanner sc = new Scanner(f, StandardCharsets.ISO_8859_1);
+            Scanner sc = new Scanner(medlemsregisterFile, StandardCharsets.ISO_8859_1);
             while(sc.hasNextLine()){
                 String line = sc.nextLine();
                 String[] antalAttributes = line.split(";");
