@@ -21,6 +21,7 @@ public class FileHandler {
                 } else {
                     System.out.println("Der er ingen medlemmer i klubben!");
                 }
+
             }
         } catch (FileNotFoundException fnfe) {
             System.out.println("Filen eksister ikke!");
@@ -32,10 +33,11 @@ public class FileHandler {
         ArrayList<Medlem> medlemArrayList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(medlemsregisterFile, StandardCharsets.ISO_8859_1);
-            while(sc.hasNextLine()){
+
+            while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] antalAttributes = line.split(";");
-                if (antalAttributes.length == 11){
+                if (antalAttributes.length == 11) {
                     String fornavn = antalAttributes[0].trim();
                     String efternavn = antalAttributes[1].trim();
                     String adresse = antalAttributes[2].trim();
@@ -50,7 +52,7 @@ public class FileHandler {
 
                     Medlem member = new Medlem(fornavn, efternavn, adresse, by, mail, køn, alder, medlemsnummer, restance, aktivitetsform, medlemstype);
                     medlemArrayList.add(member);
-                }else {
+                } else {
                     System.out.println("Længden skal være 11!");
                 }
             }
@@ -58,6 +60,6 @@ public class FileHandler {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-    return medlemArrayList;
+        return medlemArrayList;
     }
 }
