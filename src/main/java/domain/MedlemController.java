@@ -1,3 +1,7 @@
+package domain;
+
+import domain.Medlem;
+
 import java.util.ArrayList;
 
 public class MedlemController {

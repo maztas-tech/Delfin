@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.Objects;
 
 public class Medlem {
@@ -7,8 +9,8 @@ public class Medlem {
     private String adresse;
     private String by;
     private String mail;
-    private final char køn;
-    private final int alder;
+    private char køn;
+    private int alder;
     private int medlemsnummer;
     private String restance;
     private char aktivitetsform;
@@ -30,6 +32,11 @@ public class Medlem {
         this.restance = restance;
         this.aktivitetsform = aktivitetsform;
         this.medlemstype = medlemstype;
+    }
+
+    public Medlem(String fornavn, String efternavn){
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
     }
 
     @Override

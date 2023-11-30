@@ -1,3 +1,7 @@
+import domain.KonkurrenceHold;
+import domain.Medlem;
+import domain.MedlemController;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -5,6 +9,8 @@ import java.util.Scanner;
 public class UserInterface {
     MedlemController medlemController = new MedlemController();
     Scanner input = new Scanner(System.in);
+
+
     private boolean isRunning = true;
     private int userChoice;
     private boolean memberVerified = true;
@@ -19,6 +25,10 @@ public class UserInterface {
     private String restance;
     private char aktivitetsform;
     private char medlemstype;
+
+    //TODO Lav en menu som vælger hvem du er, og indtaste en unik kode for at komme ind.
+    //TODO Hvis brugeren er formand, så skal tage vores første switch
+    //TODO Hvis brugeren er træneren så skal den vælge trænerens information og egenskaber
 
     public void startProgram() {
         System.out.println("Velkommen til Delfinen!");
@@ -187,7 +197,7 @@ public class UserInterface {
         medlemController.registreMedlemmer(fornavn, efternavn, adresse,
                 by, mail, køn,
                 alder, medlemsnummer, restance, aktivitetsform, medlemstype);
-        System.out.println("Medlem er blevet tilføjet!");
+        System.out.println("domain.Medlem er blevet tilføjet!");
     }
 
     private void visMedlemmer() {

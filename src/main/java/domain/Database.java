@@ -1,3 +1,8 @@
+package domain;
+
+import datasource.FileHandler;
+import domain.Medlem;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -17,6 +22,8 @@ public class Database {
             int number2 = random.nextInt(0, 9);
             int number3 = random.nextInt(0, 9);
             int number4 = random.nextInt(0, 9);
+
+
             medlemsnummer = Integer.parseInt(sdf1.format(date) + number1 + number2 + number3 + number4);
 
         } while (generedeMedlemsnumre.contains(medlemsnummer));
@@ -29,7 +36,6 @@ public class Database {
                                   String by, String mail, char køn,
                                   int alder, String restance,
                                   char aktivitetsform, char medlemstype) {
-
 
         int medlemsnummer = medlemsnummerGenerator();
 

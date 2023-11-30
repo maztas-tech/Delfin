@@ -1,3 +1,8 @@
+package datasource;
+
+import domain.Medlem;
+import domain.KonkurrenceHold;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
