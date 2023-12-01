@@ -1,6 +1,6 @@
 package domain;
 
-import domain.Medlem;
+import datasource.Database;
 
 import java.util.ArrayList;
 
@@ -32,6 +32,9 @@ public class MedlemController {
 
     }
 
+    public void søgEfterMedlem(int medlemsnummer, String søgNavn) {
+        db.søgEfterMedlem(medlemsnummer, søgNavn);
+    }
 
     public void exit() {
         if (isChanged == true) {

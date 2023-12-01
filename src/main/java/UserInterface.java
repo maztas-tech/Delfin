@@ -1,4 +1,3 @@
-import domain.KonkurrenceHold;
 import domain.Medlem;
 import domain.MedlemController;
 
@@ -34,21 +33,95 @@ public class UserInterface {
         System.out.println("Velkommen til Delfinen!");
         medlemController.loadFromFile();
         do {
-            //TODO læs en CSV fil
+            /*
+            System.out.println("""
+                    Er du:
+                    1. Formand.
+                    2. Træner.
+                    3. Kasserer.
+                    """);
+
+            try {
+                brugerValg = Integer.parseInt(input.nextLine());
+            } catch (InputMismatchException | NumberFormatException ime) {
+                System.out.println("Skal være et tal!");
+            }
+
+            switch (brugerValg) {
+                case 1:
+                    formand(brugerKode);
+                    System.out.println("Hello formand!");
+
+                    break;
+                case 2:
+                    træner(brugerKode);
+                    System.out.println("Hello træner!");
+                    break;
+                case 3:
+                    kasserer(brugerKode);
+                    System.out.println("Hello kasserer");
+                    break;
+
+            }
+            */
             velkomst();
+
+
             try {
                 userChoice = Integer.parseInt(input.nextLine());
             } catch (InputMismatchException | NumberFormatException ime) {
                 System.out.println("Skal være et tal!");
             }
 
+
             switch (userChoice) {
                 case 1 -> registreMedlemmer();
                 case 2 -> visMedlemmer();
+                case 3 -> søgEfterMedlem();
                 case 9 -> stopProgrammet();
             }
+
+
         } while (isRunning);
     }
+
+/*    private boolean formand(int brugerInput) {
+        int KODE = 432196;
+        brugerInput = 0;
+        if (brugerInput == KODE) {
+            return true;
+            int userChoice1;
+            userChoice1 = Integer.parseInt(input.nextLine());
+            switch (userChoice1) {
+
+            }
+        } else
+            return false;
+    }
+
+
+    private boolean træner(int brugerInput) {
+        int KODE = 246896;
+        brugerInput = 0;
+        while (true) {
+            if (brugerInput == KODE) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    private boolean kasserer(int brugerInput) {
+        int KODE = 135796;
+        while (true) {
+            if (brugerInput == KODE) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }*/
 
     private void velkomst() {
 
@@ -63,7 +136,7 @@ public class UserInterface {
         while (true) {
             System.out.print("Tilføj fornavn: ");
             try {
-                fornavn = input.nextLine();
+                fornavn = input.nextLine().toUpperCase();
                 if (!fornavn.matches("[a-zA-Z]+")) {
                     throw new Exception();
                 }
@@ -76,7 +149,7 @@ public class UserInterface {
         while (true) {
             System.out.print("Tilføj efternavn: ");
             try {
-                efternavn = input.nextLine();
+                efternavn = input.nextLine().toUpperCase();
                 if (!efternavn.matches("[a-zA-Z]+")) {
                     throw new Exception();
                 }
@@ -89,7 +162,7 @@ public class UserInterface {
         while (true) {
             System.out.print("Tilføj adresse: ");
             try {
-                adresse = input.nextLine();
+                adresse = input.nextLine().toUpperCase();
                 if (!adresse.matches(".*[a-zA-Z].*") || !adresse.matches(".*[0-9].*")) {
                     throw new Exception();
                 }
@@ -102,7 +175,7 @@ public class UserInterface {
         while (true) {
             System.out.print("Tilføj by: ");
             try {
-                by = input.nextLine();
+                by = input.nextLine().toUpperCase();
                 if (!by.matches("[a-zA-Z]+")) {
                     throw new Exception();
                 }
@@ -148,7 +221,6 @@ public class UserInterface {
             }
             break;
         }
-
         while (true) {
             System.out.print("Er brugeren i restance ? Ja/Nej: ");
             try {
@@ -197,7 +269,7 @@ public class UserInterface {
         medlemController.registreMedlemmer(fornavn, efternavn, adresse,
                 by, mail, køn,
                 alder, medlemsnummer, restance, aktivitetsform, medlemstype);
-        System.out.println("domain.Medlem er blevet tilføjet!");
+        System.out.println(fornavn + " er blevet tilføjet!");
     }
 
     private void visMedlemmer() {
@@ -212,7 +284,7 @@ public class UserInterface {
         }
 
         ArrayList<Medlem> medlemArrayList = medlemController.visMedlemmer();
-        switch (userChoice){
+        switch (userChoice) {
 
             case 1:
                 System.out.println("Liste af alle medlemmer");
@@ -235,9 +307,9 @@ public class UserInterface {
             case 2:
                 //Printer Junior holdet ud på skærmen
                 System.out.println("Liste af alle medlemmer i junior hold");
-                for (Medlem medlem: medlemArrayList) {
+                for (Medlem medlem : medlemArrayList) {
                     System.out.println("");
-                    if (medlem.getAlder() < 18 && medlem.getAktivitetsform() == 'K'){
+                    if (medlem.getAlder() < 18 && medlem.getAktivitetsform() == 'K') {
                         System.out.println("Fornavn: " + medlem.getFornavn() + ", " +
                                 "Efternavn: " + medlem.getEfternavn() + ", " +
                                 "Adresse: " + medlem.getAdresse() + ", " +
@@ -255,7 +327,7 @@ public class UserInterface {
             case 3:
                 //Printer Senior holdet ud på skærmen
                 System.out.println("Senior hold");
-                for (Medlem medlem: medlemArrayList) {
+                for (Medlem medlem : medlemArrayList) {
                     System.out.println("");
                     if (medlem.getAlder() > 18 && medlem.getAktivitetsform() == 'K') {
                         System.out.println("Fornavn: " + medlem.getFornavn() + ", " +
@@ -276,6 +348,18 @@ public class UserInterface {
         }
 
 
+    }
+
+    private void søgEfterMedlem() {
+        System.out.println("Søg efter medlem via medlemsnummer");
+
+        int brugermedlemsnummer;
+        brugermedlemsnummer = Integer.parseInt(input.nextLine());
+
+        System.out.println("Søg efter medlem via fornavn");
+        String søgNavn;
+        søgNavn = input.nextLine().toUpperCase();
+        medlemController.søgEfterMedlem(brugermedlemsnummer, søgNavn);
 
     }
 

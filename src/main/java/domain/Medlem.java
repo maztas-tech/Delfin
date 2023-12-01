@@ -46,16 +46,17 @@ public class Medlem {
             return false;
         }
         Medlem medlem = (Medlem) o;
-        return køn
-                == medlem.køn && alder
-                == medlem.alder && medlemsnummer
-                == medlem.medlemsnummer && restance
-                == medlem.restance && aktivitetsform
-                == medlem.aktivitetsform && medlemstype
-                == medlem.medlemstype && Objects.equals(fornavn, medlem.fornavn)
-                && Objects.equals(efternavn, medlem.efternavn)
-                && Objects.equals(adresse, medlem.adresse)
-                && Objects.equals(by, medlem.by)
+        return  køn == medlem.køn &&
+                alder == medlem.alder &&
+                medlemsnummer == medlem.medlemsnummer &&
+                restance == medlem.restance &&
+                aktivitetsform == medlem.aktivitetsform &&
+                medlemstype == medlem.medlemstype &&
+
+                fornavn.equals(medlem.fornavn) &&
+                efternavn.equals(medlem.efternavn) &&
+                Objects.equals(adresse, medlem.adresse) &&
+                Objects.equals(by, medlem.by)
                 && Objects.equals(mail, medlem.mail);
     }
 

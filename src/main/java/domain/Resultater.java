@@ -1,26 +1,24 @@
 package domain;
 
-import domain.Medlem;
-
 import java.util.Date;
 
-public class KonkurrenceHold extends Medlem {
+public class Resultater  {
     private String disciplin;
     private double tid;
     private String stævne;
     private int placering;
     private Date dato;
 
-    public KonkurrenceHold(String fornavn, String efternavn, String disciplin, double tid, Date dato) {
-        super(fornavn, efternavn);
+    public Resultater(String fornavn, String efternavn, String disciplin, double tid, Date dato, int medlemsnummer) {
+
         this.disciplin = disciplin;
         this.tid = tid;
         this.dato = dato;
     }
 
     
-    public KonkurrenceHold(String fornavn, String efternavn, String disciplin, double tid, String stævne, int placering, Date dato){
-        super(fornavn, efternavn);
+    public Resultater(String fornavn, String efternavn, String disciplin, double tid, String stævne, int placering, Date dato){
+
         this.disciplin = disciplin;
         this.tid = tid;
         this.stævne = stævne;

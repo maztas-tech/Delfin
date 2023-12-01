@@ -1,3 +1,4 @@
+import datasource.FileHandler;
 import domain.Medlem;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,22 +18,24 @@ class FileHandlerTest {
     void tearDown() {
     }
 
+    //TODO: Load data fra Test-fil, sammenlign antal af nye medlemmer.
     @Test
-    void loadFromFile() {
+    void indlæsFraCSVFil() {
         //Arrange
 
         ArrayList<Medlem> expectedResult = new ArrayList<>();
         //Act
         expectedResult.add(new Medlem("Saka", "saka", "saka", "saka", "saka", 'M', 2, 237202, "false", 'M', 'A'));
         expectedResult.add(new Medlem("Anas", "Faisal", "Frederiksberg", "1950", "mail@mail.com", 'M', 27, 237267, "false", 'M', 'A'));
-        expectedResult.add(new Medlem("Sam", "Sam", "Sam", "Sam", "Sam", 'M', 22222, 233214, "false", 'M', 'A'));
-        expectedResult.add(new Medlem("Anas", "Saka", "Sam", "Maz", "Maz", 'M', 2222222, 233523, "false", 'M', 'A'));
+
         //Assert
 
-        int actualSize = expectedResult.size();
-        int expectedSize = 4;
 
-        assertEquals(actualSize, expectedSize);
+        FileHandler fileHandler = new FileHandler();
+        ArrayList<Medlem> actualResult = fileHandler.indlæsFraCSVFil();
+
+
+        assertEquals(actualResult.size(), expectedResult.size());
 
     }
 }

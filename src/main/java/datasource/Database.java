@@ -1,4 +1,4 @@
-package domain;
+package datasource;
 
 import datasource.FileHandler;
 import domain.Medlem;
@@ -11,8 +11,11 @@ public class Database {
     Date date = new Date();
     FileHandler fileHandler = new FileHandler();
 
+    //TODO Definer resultat-liste
+
     public ArrayList<Medlem> medlemArrayList = new ArrayList<>();
     private Set<Integer> generedeMedlemsnumre = new HashSet<>();
+
 
     private int medlemsnummerGenerator() {
         SimpleDateFormat sdf1 = new SimpleDateFormat("YY");
@@ -54,7 +57,6 @@ public class Database {
     }
 
 
-
     public void loadFromFile() {
         ArrayList<Medlem> loadedMedlemArrayList;
         loadedMedlemArrayList = fileHandler.indlæsFraCSVFil();
@@ -64,6 +66,21 @@ public class Database {
             //loadedMedlemArrayList.clear();
         } else {
             System.out.println("Ingen gemte medlemmer.");
+        }
+    }
+
+
+    //TODO: Lav en unit test til denne metode
+    public void søgEfterMedlem(int medlemsnummer, String søgNavn) {
+        for (Medlem medlem : medlemArrayList) {
+            if (medlem.getMedlemsnummer() == medlemsnummer) {
+                System.out.println(medlem);
+                break;
+            }
+            else if(medlem.getFornavn().toLowerCase().contains(søgNavn) || medlem.getFornavn().toUpperCase().contains(søgNavn)){
+                System.out.println(medlem);
+                break;
+            }
         }
     }
 }

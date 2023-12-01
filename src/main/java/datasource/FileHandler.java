@@ -1,7 +1,6 @@
 package datasource;
 
 import domain.Medlem;
-import domain.KonkurrenceHold;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +16,10 @@ public class FileHandler {
     private File juniorFile = new File("juniorHoldet.csv");
     private File seniorFile = new File("seniorHoldet.csv");
 
+
+    //TODO: Udskriv medlemsID til en csv-fil.
     public void indsætMedlemmer(ArrayList<Medlem> medlemArrayList) {
+
         try {
             PrintStream output = new PrintStream(medlemsregisterFile);
             for (Medlem medlem : medlemArrayList) {
