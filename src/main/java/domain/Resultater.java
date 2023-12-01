@@ -8,6 +8,7 @@ public class Resultater  {
     private String stævne;
     private int placering;
     private Date dato;
+    private int medlemsnummer;
 
     public Resultater(String fornavn, String efternavn, String disciplin, double tid, Date dato, int medlemsnummer) {
 
@@ -30,7 +31,7 @@ public class Resultater  {
 
     @Override
     public String toString() {
-        return  "Fornavn og efternavn: " + getFornavn() + " " + getEfternavn() + "\n" +
+        return  "Fornavn og efternavn: " + "\n" +
                 "Disciplin: " + disciplin + '\n' +
                 "Tid: " + tid + "\n" +
                 "Stævne: " + stævne + "\n" +
