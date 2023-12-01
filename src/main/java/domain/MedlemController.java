@@ -1,6 +1,6 @@
 package domain;
 
-import domain.Medlem;
+import datasource.Database;
 
 import java.util.ArrayList;
 

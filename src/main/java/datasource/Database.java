@@ -1,4 +1,4 @@
-package domain;
+package datasource;
 
 import datasource.FileHandler;
 import domain.Medlem;
