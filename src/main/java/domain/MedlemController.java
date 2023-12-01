@@ -41,4 +41,9 @@ public class MedlemController {
             db.gemÆndringer();
         }
     }
+    public void fjernMedlemmer(int søgeMedlemsnummer){
+        isChanged = true;
+        db.fjernMedlememer(søgeMedlemsnummer);
+    }
+
 }

@@ -78,7 +78,9 @@ public class UserInterface {
                 case 1 -> registreMedlemmer();
                 case 2 -> visMedlemmer();
                 case 3 -> søgEfterMedlem();
+                case 4 -> fjernmedlemmer();
                 case 9 -> stopProgrammet();
+
             }
 
 
@@ -128,7 +130,10 @@ public class UserInterface {
         System.out.println("""
                 1. Registre et nyt medlem   \s
                 2. Vis medlemmer           \s
+                3. Søg efter medlemmer     \s
+                4. Fjern medlemmer
                 9. Afslut programmet
+                                
                 """);
     }
 
@@ -363,11 +368,25 @@ public class UserInterface {
 
     }
 
+    private void fjernmedlemmer() {
+        try {
+            System.out.print("Indtast medlemsnummer: ");
+            System.out.println("Medlem er fjernet");
+            medlemsnummer = Integer.parseInt(input.nextLine());
+            medlemController.fjernMedlemmer(medlemsnummer);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Medlems nummer findes ikke.");
+        }
+
+    }
+
 
     private void stopProgrammet() {
         System.out.println("Programmet er hermed stoppet");
         medlemController.exit();
         isRunning = false;
     }
+
+
 }
 

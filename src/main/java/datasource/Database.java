@@ -83,5 +83,10 @@ public class Database {
             }
         }
     }
+
+    public void fjernMedlememer(int søgeMedlemsnummer){
+        medlemArrayList.removeIf(medlem -> søgeMedlemsnummer == medlem.getMedlemsnummer());
+
+    }
 }
 
