@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Date;
 
-public class Resultater  {
+public class Resultat {
     private String disciplin;
     private double tid;
     private String stævne;
@@ -10,7 +10,7 @@ public class Resultater  {
     private Date dato;
     private int medlemsnummer;
 
-    public Resultater(String fornavn, String efternavn, String disciplin, double tid, Date dato, int medlemsnummer) {
+    public Resultat(String fornavn, String efternavn, String disciplin, double tid, Date dato, int medlemsnummer) {
 
         this.disciplin = disciplin;
         this.tid = tid;
@@ -18,7 +18,7 @@ public class Resultater  {
     }
 
     
-    public Resultater(String fornavn, String efternavn, String disciplin, double tid, String stævne, int placering, Date dato){
+    public Resultat(String fornavn, String efternavn, String disciplin, double tid, String stævne, int placering, Date dato){
 
         this.disciplin = disciplin;
         this.tid = tid;
