@@ -7,19 +7,19 @@ public class Resultat {
     private double tid;
     private String stævne;
     private int placering;
-    private Date dato;
+    private String dato;
     private int medlemsnummer;
 
-    public Resultat(String fornavn, String efternavn, String disciplin, double tid, Date dato, int medlemsnummer) {
-
+    public Resultat(String disciplin, double tid, String dato, int medlemsnummer) {
+        this.medlemsnummer = medlemsnummer;
         this.disciplin = disciplin;
         this.tid = tid;
         this.dato = dato;
     }
 
-    
-    public Resultat(String fornavn, String efternavn, String disciplin, double tid, String stævne, int placering, Date dato){
 
+    public Resultat(String disciplin, double tid, String stævne, int placering, String dato, int medlemsnummer) {
+        this.medlemsnummer = medlemsnummer;
         this.disciplin = disciplin;
         this.tid = tid;
         this.stævne = stævne;
@@ -28,10 +28,9 @@ public class Resultat {
     }
 
 
-
     @Override
     public String toString() {
-        return  "Fornavn og efternavn: " + "\n" +
+        return "Medlemsnummer: " + medlemsnummer + "\n" +
                 "Disciplin: " + disciplin + '\n' +
                 "Tid: " + tid + "\n" +
                 "Stævne: " + stævne + "\n" +

@@ -1,7 +1,9 @@
 import domain.Medlem;
 import domain.MedlemController;
+import domain.Resultat;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -24,6 +26,15 @@ public class UserInterface {
     private String restance;
     private char aktivitetsform;
     private char medlemstype;
+    private String disciplin;
+    private double tid;
+    private int dag;
+    private int måned;
+    private int år;
+    private String dato;
+    private String stævne;
+    private int placering;
+
 
     //TODO Lav en menu som vælger hvem du er, og indtaste en unik kode for at komme ind.
     //TODO Hvis brugeren er formand, så skal tage vores første switch
@@ -78,6 +89,8 @@ public class UserInterface {
                 case 1 -> registreMedlemmer();
                 case 2 -> visMedlemmer();
                 case 3 -> søgEfterMedlem();
+                case 4 -> registrerResultat();
+                case 5 -> visResultater();
                 case 9 -> stopProgrammet();
             }
 
@@ -368,6 +381,95 @@ public class UserInterface {
         System.out.println("Programmet er hermed stoppet");
         medlemController.exit();
         isRunning = false;
+    }
+
+    private void registrerResultat() {
+
+        while (true) {
+            System.out.print("""
+                    indtast medlemsnummer\s""");
+            try {
+                medlemsnummer = Integer.parseInt(input.nextLine());
+            } catch (NumberFormatException nfe) {
+                System.out.println("indtast nummer");
+                continue;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.print("""
+                    indtast disciplin\s""");
+            try {
+                disciplin = input.nextLine().toUpperCase();
+            } catch (Exception e) {
+                System.out.println("indtast bogstaver");
+                continue;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.print("""
+                    indtast tidspunkt\s""");
+            try {
+                tid = Double.parseDouble(input.nextLine().toUpperCase());
+            } catch (NumberFormatException nfe) {
+                System.out.println("indtast nummer");
+                continue;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.print("""
+                    indtast stævner\s""");
+            try {
+                stævne = input.nextLine().toUpperCase();
+            } catch (Exception e) {
+                System.out.println("indtast bogstaver");
+                continue;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.print("""
+                    indtast placering\s""");
+            try {
+                placering = Integer.parseInt(input.nextLine());
+            } catch (NumberFormatException nfe) {
+                System.out.println("indtast et nummer");
+                continue;
+            }
+            break;
+        }
+
+        while (true) {
+            System.out.print("""
+                    indtast dato\s""");
+            try {
+                System.out.print("Indtast dag: ");
+                dag = Integer.parseInt(input.nextLine());
+                System.out.print("Indtast måned: ");
+                måned = Integer.parseInt(input.nextLine());
+                System.out.print("Indtast år: ");
+                år = Integer.parseInt(input.nextLine());
+
+            } catch (NumberFormatException nfe) {
+                System.out.println("indtast dag/måned/år");
+                continue;
+            }
+            dato = dag + "/" + måned + "/" + år;
+            break;
+        }
+
+
+        medlemController.resultat(medlemsnummer, disciplin, tid, stævne, placering, dato);
+    }
+
+    private void visResultater() {
+        System.out.println(medlemController.getResultater());
     }
 }
 

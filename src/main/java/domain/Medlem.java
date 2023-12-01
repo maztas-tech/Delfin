@@ -34,7 +34,7 @@ public class Medlem {
         this.medlemstype = medlemstype;
     }
 
-    public Medlem(String fornavn, String efternavn){
+    public Medlem(String fornavn, String efternavn) {
         this.fornavn = fornavn;
         this.efternavn = efternavn;
     }
@@ -46,7 +46,7 @@ public class Medlem {
             return false;
         }
         Medlem medlem = (Medlem) o;
-        return  køn == medlem.køn &&
+        return køn == medlem.køn &&
                 alder == medlem.alder &&
                 medlemsnummer == medlem.medlemsnummer &&
                 restance == medlem.restance &&
@@ -170,7 +170,7 @@ public class Medlem {
         //stringBuilder.append(";\tMedlemsnummer: ");
         stringBuilder.append(medlemsnummer);
         stringBuilder.append(";");
-       // stringBuilder.append(";\tRestance: ");
+        // stringBuilder.append(";\tRestance: ");
         stringBuilder.append(restance);
         stringBuilder.append(";");
         //stringBuilder.append(";\tAktivitetsform: ");

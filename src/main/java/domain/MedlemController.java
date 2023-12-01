@@ -3,6 +3,7 @@ package domain;
 import datasource.Database;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MedlemController {
     Database db = new Database();
@@ -40,5 +41,13 @@ public class MedlemController {
         if (isChanged == true) {
             db.gemÆndringer();
         }
+    }
+
+    public void resultat(int medlemsnummer, String disciplin, double tid, String stævne, int placering, String dato) {
+        db.resultat(medlemsnummer, disciplin, tid, stævne, placering, dato);
+    }
+
+    public ArrayList getResultater() {
+        return db.getResultater();
     }
 }

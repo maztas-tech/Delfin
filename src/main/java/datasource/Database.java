@@ -2,6 +2,7 @@ package datasource;
 
 import datasource.FileHandler;
 import domain.Medlem;
+import domain.Resultat;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -15,6 +16,7 @@ public class Database {
 
     public ArrayList<Medlem> medlemArrayList = new ArrayList<>();
     private Set<Integer> generedeMedlemsnumre = new HashSet<>();
+    private ArrayList<Resultat> resultater = new ArrayList<>();
 
 
     private int medlemsnummerGenerator() {
@@ -76,12 +78,24 @@ public class Database {
             if (medlem.getMedlemsnummer() == medlemsnummer) {
                 System.out.println(medlem);
                 break;
-            }
-            else if(medlem.getFornavn().toLowerCase().contains(søgNavn) || medlem.getFornavn().toUpperCase().contains(søgNavn)){
+            } else if (medlem.getFornavn().toLowerCase().contains(søgNavn) || medlem.getFornavn().toUpperCase().contains(søgNavn)) {
                 System.out.println(medlem);
                 break;
             }
         }
+    }
+
+    public void resultat(int medlemsnummer, String disciplin, double tid, String stævne, int placering, String dato) {
+        Resultat resultat = new Resultat(disciplin, tid, stævne, placering, dato, medlemsnummer);
+        for (Medlem medlem : medlemArrayList) {
+            if (medlemsnummer == medlem.getMedlemsnummer()) {
+                resultater.add(resultat);
+            }
+        }
+    }
+
+    public ArrayList getResultater() {
+        return resultater;
     }
 }
 
