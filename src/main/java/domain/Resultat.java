@@ -30,11 +30,19 @@ public class Resultat {
 
     @Override
     public String toString() {
-        return "Medlemsnummer: " + medlemsnummer + "\n" +
-                "Disciplin: " + disciplin + '\n' +
-                "Tid: " + tid + "\n" +
-                "Stævne: " + stævne + "\n" +
-                "Placering: " + placering + "\n" +
-                "Dato: " + dato;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(medlemsnummer);
+        stringBuilder.append(";");
+        stringBuilder.append(disciplin);
+        stringBuilder.append(";");
+        stringBuilder.append(stævne);
+        stringBuilder.append(";");
+        stringBuilder.append(tid);
+        stringBuilder.append(";");
+        stringBuilder.append(placering);
+        stringBuilder.append(";");
+        stringBuilder.append(dato);
+        return stringBuilder.toString();
     }
+
 }

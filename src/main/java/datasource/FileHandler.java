@@ -1,6 +1,7 @@
 package datasource;
 
 import domain.Medlem;
+import domain.Resultat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +16,7 @@ public class FileHandler {
     private File medlemsregisterFile = new File("Medlemsregister.csv");
     private File juniorFile = new File("juniorHoldet.csv");
     private File seniorFile = new File("seniorHoldet.csv");
+    private File resultatFile = new File("resultater.csv");
 
 
     //TODO: Udskriv medlemsID til en csv-fil.
@@ -66,6 +68,22 @@ public class FileHandler {
         }
     }
 
+    public void indsætResultater(ArrayList<Resultat> resultatlist){
+        try {
+            PrintStream resultaterOutput = new PrintStream(resultatFile);
+            for (Resultat resultat: resultatlist){
+                if (resultat != null) {
+                    resultaterOutput.println(resultat);
+                }
+                else {
+                    System.out.println("Ingen resultater i klubben");
+                }
+            }
+        }catch (FileNotFoundException fnfe){
+            fnfe.printStackTrace();
+        }
+    }
+    //-------------------------------------------------------------------------------------------------------------------
     public ArrayList<Medlem> indlæsFraCSVFil() {
 
         ArrayList<Medlem> medlemArrayList = new ArrayList<>();
@@ -90,8 +108,6 @@ public class FileHandler {
 
                     Medlem member = new Medlem(fornavn, efternavn, adresse, by, mail, køn, alder, medlemsnummer, restance, aktivitetsform, medlemstype);
                     medlemArrayList.add(member);
-                } else {
-                    System.out.println("Længden skal være 11!");
                 }
             }
             sc.close();
@@ -100,6 +116,7 @@ public class FileHandler {
         }
         return medlemArrayList;
     }
+
 
     public ArrayList<Medlem> indlæsFraSeniorCSVFil() {
 
@@ -169,4 +186,34 @@ public class FileHandler {
         }
         return medlemArrayList;
     }
+
+    public ArrayList<Resultat> indlæsFraResultatCSVFil() {
+
+        ArrayList<Resultat> resultatList = new ArrayList<>();
+        try {
+            Scanner sc = new Scanner(resultatFile);
+
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] antalAttributes = line.split(";");
+                if (antalAttributes.length == 6) {
+                    String disciplin = antalAttributes[0].trim();
+                    double tid = Double.parseDouble(antalAttributes[1].trim());
+                    String stævne = antalAttributes[2].trim();
+                    int placering = Integer.parseInt(antalAttributes[3].trim());
+                    String dato = antalAttributes[4].trim();
+                    int medlemsnummer= Integer.parseInt(antalAttributes[5].trim());
+                   Resultat resultat = new Resultat(disciplin,tid,stævne,placering,dato,medlemsnummer);
+                   resultatList.add(resultat);
+                } else {
+                    System.out.println("Længden skal være 6!");
+                }
+            }
+            sc.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return resultatList;
+    }
+
 }

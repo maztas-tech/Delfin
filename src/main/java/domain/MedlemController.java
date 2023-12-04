@@ -3,7 +3,6 @@ package domain;
 import datasource.Database;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MedlemController {
     Database db = new Database();
@@ -21,7 +20,7 @@ public class MedlemController {
     }
 
     public ArrayList<Medlem> visMedlemmer() {
-        return db.visMedlemmer();
+        return db.getMedlemmer();
     }
 
     public void saveChanges() {
@@ -44,10 +43,26 @@ public class MedlemController {
     }
 
     public void resultat(int medlemsnummer, String disciplin, double tid, String stævne, int placering, String dato) {
+        isChanged = true;
         db.resultat(medlemsnummer, disciplin, tid, stævne, placering, dato);
     }
 
     public ArrayList getResultater() {
         return db.getResultater();
+    }
+
+    public void loadFromResultatFile(){
+        db.loadFromResultatFile();
+    }
+
+    public boolean tjeckOmmedlemErIListe(int medlemsnummer){
+        ArrayList<Medlem>medlemArrayList=db.getMedlemmer();
+        boolean eksistere=false;
+        for (Medlem medlem:medlemArrayList){
+            if (medlem.getMedlemsnummer()==medlemsnummer){
+                eksistere=true;
+            }
+        }
+        return eksistere;
     }
 }

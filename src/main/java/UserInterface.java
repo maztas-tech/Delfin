@@ -43,6 +43,7 @@ public class UserInterface {
     public void startProgram() {
         System.out.println("Velkommen til Delfinen!");
         medlemController.loadFromFile();
+        medlemController.loadFromResultatFile();
         do {
             /*
             System.out.println("""
@@ -141,6 +142,9 @@ public class UserInterface {
         System.out.println("""
                 1. Registre et nyt medlem   \s
                 2. Vis medlemmer           \s
+                3. Søg efter specifik medlem
+                4. Registre resultat
+                5. Vis resultater
                 9. Afslut programmet
                 """);
     }
@@ -363,6 +367,7 @@ public class UserInterface {
 
     }
 
+    //TODO ret til kun at tage imod medlemsnummer
     private void søgEfterMedlem() {
         System.out.println("Søg efter medlem via medlemsnummer");
 
@@ -384,17 +389,24 @@ public class UserInterface {
     }
 
     private void registrerResultat() {
-
-        while (true) {
+            boolean firstLoop = true;
+        while (firstLoop) {
             System.out.print("""
                     indtast medlemsnummer\s""");
             try {
                 medlemsnummer = Integer.parseInt(input.nextLine());
-            } catch (NumberFormatException nfe) {
-                System.out.println("indtast nummer");
-                continue;
+                if (medlemController.tjeckOmmedlemErIListe(medlemsnummer)){
+                    firstLoop=false;
+                }else {
+                    System.out.println("eksisterer ikke");
+                }
+               /* if (medlemController.visMedlemmer().contains(medlemsnummer)){
+                    firstLoop=false;
+                }*/
+            } catch (Exception e){
+                System.out.println("indtast tal");
             }
-            break;
+
         }
 
         while (true) {
@@ -411,7 +423,7 @@ public class UserInterface {
 
         while (true) {
             System.out.print("""
-                    indtast tidspunkt\s""");
+                    svømme tid\s""");
             try {
                 tid = Double.parseDouble(input.nextLine().toUpperCase());
             } catch (NumberFormatException nfe) {

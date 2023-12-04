@@ -1,6 +1,5 @@
 package datasource;
 
-import datasource.FileHandler;
 import domain.Medlem;
 import domain.Resultat;
 
@@ -48,14 +47,16 @@ public class Database {
                 by, mail, køn, alder, medlemsnummer, restance, aktivitetsform, medlemstype));
     }
 
-    public ArrayList<Medlem> visMedlemmer() {
+    public ArrayList<Medlem> getMedlemmer() {
         return medlemArrayList;
     }
 
     public void gemÆndringer() {
+        fileHandler.indsætResultater(resultater);
         fileHandler.indsætMedlemmer(medlemArrayList);
         fileHandler.indsætJuniorMedlem(medlemArrayList);
         fileHandler.indsætSeniorMedlem(medlemArrayList);
+
     }
 
 
@@ -71,6 +72,13 @@ public class Database {
         }
     }
 
+    public void loadFromResultatFile(){
+        ArrayList<Resultat> loadResultatList;
+        loadResultatList=fileHandler.indlæsFraResultatCSVFil();
+        if (loadResultatList!= null){
+            resultater.addAll(loadResultatList);
+        }
+    }
 
     //TODO: Lav en unit test til denne metode
     public void søgEfterMedlem(int medlemsnummer, String søgNavn) {
@@ -78,10 +86,10 @@ public class Database {
             if (medlem.getMedlemsnummer() == medlemsnummer) {
                 System.out.println(medlem);
                 break;
-            } else if (medlem.getFornavn().toLowerCase().contains(søgNavn) || medlem.getFornavn().toUpperCase().contains(søgNavn)) {
+            }/* else if (medlem.getFornavn().toLowerCase().contains(søgNavn) || medlem.getFornavn().toUpperCase().contains(søgNavn)) {
                 System.out.println(medlem);
                 break;
-            }
+            }*/
         }
     }
 
