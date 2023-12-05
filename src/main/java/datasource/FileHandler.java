@@ -43,7 +43,7 @@ public class FileHandler {
             for (Medlem medlem : medlemArrayList) {
                 if (medlem.getAlder() < 18 && medlem.getAktivitetsform() == 'K') {
                     juniorOutput.println(medlem);
-                }else {
+                } else {
                     System.out.println("Ingen under 18");
                 }
             }
@@ -68,21 +68,21 @@ public class FileHandler {
         }
     }
 
-    public void indsætResultater(ArrayList<Resultat> resultatlist){
+    public void indsætResultater(ArrayList<Resultat> resultatlist) {
         try {
             PrintStream resultaterOutput = new PrintStream(resultatFile);
-            for (Resultat resultat: resultatlist){
+            for (Resultat resultat : resultatlist) {
                 if (resultat != null) {
                     resultaterOutput.println(resultat);
-                }
-                else {
+                } else {
                     System.out.println("Ingen resultater i klubben");
                 }
             }
-        }catch (FileNotFoundException fnfe){
+        } catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
         }
     }
+
     //-------------------------------------------------------------------------------------------------------------------
     public ArrayList<Medlem> indlæsFraCSVFil() {
 
@@ -152,6 +152,7 @@ public class FileHandler {
         }
         return medlemArrayList;
     }
+
     public ArrayList<Medlem> indlæsFraJuniorCSVFil() {
 
         ArrayList<Medlem> medlemArrayList = new ArrayList<>();
@@ -197,14 +198,14 @@ public class FileHandler {
                 String line = sc.nextLine();
                 String[] antalAttributes = line.split(";");
                 if (antalAttributes.length == 6) {
-                    String disciplin = antalAttributes[0].trim();
-                    double tid = Double.parseDouble(antalAttributes[1].trim());
+                    int medlemsnummer = Integer.parseInt(antalAttributes[0].trim());
+                    String disciplin = antalAttributes[1].trim();
                     String stævne = antalAttributes[2].trim();
-                    int placering = Integer.parseInt(antalAttributes[3].trim());
-                    String dato = antalAttributes[4].trim();
-                    int medlemsnummer= Integer.parseInt(antalAttributes[5].trim());
-                   Resultat resultat = new Resultat(disciplin,tid,stævne,placering,dato,medlemsnummer);
-                   resultatList.add(resultat);
+                    double tid = Double.parseDouble(antalAttributes[3].trim());
+                    int placering = Integer.parseInt(antalAttributes[4].trim());
+                    String dato = antalAttributes[5].trim();
+                    Resultat resultat = new Resultat(disciplin, tid, stævne, placering, dato, medlemsnummer);
+                    resultatList.add(resultat);
                 } else {
                     System.out.println("Længden skal være 6!");
                 }
