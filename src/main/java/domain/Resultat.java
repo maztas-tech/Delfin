@@ -27,6 +27,13 @@ public class Resultat {
         this.dato = dato;
     }
 
+    public double getTid() {
+        return tid;
+    }
+
+    public int getPlacering() {
+        return placering;
+    }
 
     @Override
     public String toString() {

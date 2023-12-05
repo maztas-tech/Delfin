@@ -1,9 +1,7 @@
 import domain.Medlem;
 import domain.MedlemController;
-import domain.Resultat;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -45,39 +43,8 @@ public class UserInterface {
         medlemController.loadFromFile();
         medlemController.loadFromResultatFile();
         do {
-            /*
-            System.out.println("""
-                    Er du:
-                    1. Formand.
-                    2. Træner.
-                    3. Kasserer.
-                    """);
 
-            try {
-                brugerValg = Integer.parseInt(input.nextLine());
-            } catch (InputMismatchException | NumberFormatException ime) {
-                System.out.println("Skal være et tal!");
-            }
-
-            switch (brugerValg) {
-                case 1:
-                    formand(brugerKode);
-                    System.out.println("Hello formand!");
-
-                    break;
-                case 2:
-                    træner(brugerKode);
-                    System.out.println("Hello træner!");
-                    break;
-                case 3:
-                    kasserer(brugerKode);
-                    System.out.println("Hello kasserer");
-                    break;
-
-            }
-            */
             velkomst();
-
 
             try {
                 userChoice = Integer.parseInt(input.nextLine());
@@ -92,8 +59,9 @@ public class UserInterface {
                 case 3 -> søgEfterMedlem();
                 case 4 -> registrerResultat();
                 case 5 -> visResultater();
-                case 6 -> fjernmedlemmer();
-                case 7 -> redigeremedlemmer();
+                case 6 -> fjernMedlemmer();
+                case 7 -> redigereMedlemmer();
+                case 8 -> sorterSvømmere();
                 case 9 -> stopProgrammet();
 
             }
@@ -102,43 +70,7 @@ public class UserInterface {
         } while (isRunning);
     }
 
-/*    private boolean formand(int brugerInput) {
-        int KODE = 432196;
-        brugerInput = 0;
-        if (brugerInput == KODE) {
-            return true;
-            int userChoice1;
-            userChoice1 = Integer.parseInt(input.nextLine());
-            switch (userChoice1) {
 
-            }
-        } else
-            return false;
-    }
-
-
-    private boolean træner(int brugerInput) {
-        int KODE = 246896;
-        brugerInput = 0;
-        while (true) {
-            if (brugerInput == KODE) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    private boolean kasserer(int brugerInput) {
-        int KODE = 135796;
-        while (true) {
-            if (brugerInput == KODE) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }*/
 
     private void velkomst() {
 
@@ -150,6 +82,7 @@ public class UserInterface {
                 5. Vis resultater
                 6. Fjern et medlem
                 7. Redigerer stamoplysninnger.
+                8. Sorter svømmere
                 9. Afslut programmet
                                 
                 """);
@@ -373,7 +306,7 @@ public class UserInterface {
 
     }
 
-    //TODO ret til kun at tage imod medlemsnummer
+
     private void søgEfterMedlem() {
         System.out.println("Søg efter medlem via medlemsnummer");
 
@@ -387,7 +320,7 @@ public class UserInterface {
 
     }
 
-    private void fjernmedlemmer() {
+    private void fjernMedlemmer() {
         try {
             System.out.print("Indtast medlemsnummer: ");
             System.out.println("Medlem er fjernet");
@@ -399,7 +332,7 @@ public class UserInterface {
 
     }
 
-    private void redigeremedlemmer() {
+    private void redigereMedlemmer() {
         System.out.println("Indtast medlensnummer");
         medlemsnummer = Integer.parseInt(input.nextLine());
         System.out.println(" Indtast fornavn");
@@ -516,6 +449,17 @@ public class UserInterface {
 
 
         medlemController.resultat(medlemsnummer, disciplin, tid, stævne, placering, dato);
+    }
+
+    private void sorterSvømmere(){
+        System.out.println("Test success");
+        //TODO Step 1 Indlæse CSV filer fra junior og senior hold
+        //TODO Step 2 Vælge hvilket hold du vil sortere (senior eller junior)
+        //TODO Step 3 Juster koden så admin kan trykke 1 - 4 der repræsenter hver disciplin
+        //TODO Step 4 Brugeren skal vælge hvilken disciplin de vil sortere
+        //TODO Step 5 Sætte en limiter for at foreach loopen ikke overskrider værdien 5, så den stopper efter værdien 5.
+        //TODO Step 6 Vise top 5 svømmere for den ønskede disciplin
+
     }
 
     private void visResultater() {
