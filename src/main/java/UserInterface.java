@@ -92,7 +92,10 @@ public class UserInterface {
                 case 3 -> søgEfterMedlem();
                 case 4 -> registrerResultat();
                 case 5 -> visResultater();
+                case 6 -> fjernmedlemmer();
+                case 7 -> redigeremedlemmer();
                 case 9 -> stopProgrammet();
+
             }
 
 
@@ -142,10 +145,13 @@ public class UserInterface {
         System.out.println("""
                 1. Registre et nyt medlem   \s
                 2. Vis medlemmer           \s
-                3. Søg efter specifik medlem
+                3. Søg efter medlemmer     \s
                 4. Registre resultat
                 5. Vis resultater
+                6. Fjern et medlem
+                7. Redigerer stamoplysninnger.
                 9. Afslut programmet
+                                
                 """);
     }
 
@@ -379,6 +385,38 @@ public class UserInterface {
         søgNavn = input.nextLine().toUpperCase();
         medlemController.søgEfterMedlem(brugermedlemsnummer, søgNavn);
 
+    }
+
+    private void fjernmedlemmer() {
+        try {
+            System.out.print("Indtast medlemsnummer: ");
+            System.out.println("Medlem er fjernet");
+            medlemsnummer = Integer.parseInt(input.nextLine());
+            medlemController.fjernMedlemmer(medlemsnummer);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Medlems nummer findes ikke.");
+        }
+
+    }
+
+    private void redigeremedlemmer() {
+        System.out.println("Indtast medlensnummer");
+        medlemsnummer = Integer.parseInt(input.nextLine());
+        System.out.println(" Indtast fornavn");
+        fornavn = input.nextLine();
+        System.out.println("Indtast efternavn");
+        efternavn = input.nextLine();
+        System.out.println("Indtast mail");
+        mail = input.nextLine();
+        System.out.println(" Indtast adresse");
+        adresse = input.nextLine();
+        System.out.println("Indtast by");
+        by = input.nextLine();
+        System.out.println("Indtast medlemstype");
+        medlemstype = input.nextLine().toUpperCase().charAt(0);
+        System.out.println("Indtast aktivitetsform");
+        aktivitetsform = input.nextLine().toUpperCase().charAt(0);
+        medlemController.redigereMedlememr(medlemsnummer, fornavn, efternavn, mail, adresse, by, medlemstype, aktivitetsform);
     }
 
 

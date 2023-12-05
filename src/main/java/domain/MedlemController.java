@@ -36,6 +36,16 @@ public class MedlemController {
         db.søgEfterMedlem(medlemsnummer, søgNavn);
     }
 
+    public void fjernMedlemmer ( int søgeMedlemsnummer){
+        isChanged = true;
+        db.fjernMedlememer(søgeMedlemsnummer);
+    }
+
+    public void redigereMedlememr ( int medlemsnummer, String fornavn, String efternavm, String mail, String
+            adresse, String by,char medlemstype, char aktivitetsform){
+        isChanged = true;
+        db.redigereMedlem(medlemsnummer, fornavn, efternavm, mail, adresse, by, medlemstype, aktivitetsform);
+    }
     public void exit() {
         if (isChanged == true) {
             db.gemÆndringer();
@@ -47,22 +57,22 @@ public class MedlemController {
         db.resultat(medlemsnummer, disciplin, tid, stævne, placering, dato);
     }
 
-    public ArrayList getResultater() {
+    public ArrayList getResultater () {
         return db.getResultater();
     }
-
-    public void loadFromResultatFile(){
+    public void loadFromResultatFile () {
         db.loadFromResultatFile();
     }
 
-    public boolean tjeckOmmedlemErIListe(int medlemsnummer){
-        ArrayList<Medlem>medlemArrayList=db.getMedlemmer();
-        boolean eksistere=false;
-        for (Medlem medlem:medlemArrayList){
-            if (medlem.getMedlemsnummer()==medlemsnummer){
-                eksistere=true;
+    public boolean tjeckOmmedlemErIListe ( int medlemsnummer){
+        ArrayList<Medlem> medlemArrayList = db.getMedlemmer();
+        boolean eksistere = false;
+        for (Medlem medlem : medlemArrayList) {
+            if (medlem.getMedlemsnummer() == medlemsnummer) {
+                eksistere = true;
             }
         }
         return eksistere;
     }
 }
+

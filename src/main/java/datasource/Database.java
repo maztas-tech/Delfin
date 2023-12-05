@@ -59,6 +59,21 @@ public class Database {
 
     }
 
+    public void redigereMedlem(int medlemsnummer,String fornavn, String efternavm, String mail, String adresse, String by, char medlemstype, char aktivitetsform){
+        for (Medlem medlem: medlemArrayList){
+            if (medlem.getMedlemsnummer()== medlemsnummer){
+                medlem.setFornavn(fornavn);
+                medlem.setEfternavn(efternavm);
+                medlem.setMail(mail);
+                medlem.setAdresse(adresse);
+                medlem.setBy(by);
+                medlem.setMedlemstype(medlemstype);
+                medlem.setAktivitetsform(aktivitetsform);
+            }
+        }
+
+    }
+
 
     public void loadFromFile() {
         ArrayList<Medlem> loadedMedlemArrayList;
@@ -91,6 +106,11 @@ public class Database {
                 break;
             }*/
         }
+    }
+
+    public void fjernMedlememer(int søgeMedlemsnummer){
+        medlemArrayList.removeIf(medlem -> søgeMedlemsnummer == medlem.getMedlemsnummer());
+
     }
 
     public void resultat(int medlemsnummer, String disciplin, double tid, String stævne, int placering, String dato) {
