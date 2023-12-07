@@ -400,8 +400,21 @@ public class UserInterface {
     }
 
     private void redigeremedlemmer() {
-        System.out.println("Indtast medlensnummer");
-        medlemsnummer = Integer.parseInt(input.nextLine());
+        boolean firstLoop = true;
+        while (firstLoop) {
+            System.out.print("""
+                    indtast medlemsnummer\s""");
+            try {
+                medlemsnummer = Integer.parseInt(input.nextLine());
+                if (medlemController.tjeckOmmedlemErIListe(medlemsnummer)){
+                    firstLoop=false;
+                }else {
+                    System.out.println("eksisterer ikke");
+                }
+            } catch (Exception e){
+                System.out.println("indtast tal");
+            }
+        }
         System.out.println(" Indtast fornavn");
         fornavn = input.nextLine();
         System.out.println("Indtast efternavn");

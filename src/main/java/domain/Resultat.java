@@ -9,7 +9,7 @@ public class Resultat {
     private int placering;
     private String dato;
     private int medlemsnummer;
-
+//hej
     public Resultat(String disciplin, double tid, String dato, int medlemsnummer) {
         this.medlemsnummer = medlemsnummer;
         this.disciplin = disciplin;
