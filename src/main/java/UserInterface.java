@@ -78,7 +78,6 @@ public class UserInterface {
             */
             velkomst();
 
-
             try {
                 userChoice = Integer.parseInt(input.nextLine());
             } catch (InputMismatchException | NumberFormatException ime) {
@@ -375,7 +374,7 @@ public class UserInterface {
 
     }
 
-    //TODO ret til kun at tage imod medlemsnummer
+
     private void søgEfterMedlem() {
         System.out.println("Søg efter medlem via medlemsnummer");
 
@@ -531,6 +530,17 @@ public class UserInterface {
 
 
         medlemController.resultat(medlemsnummer, disciplin, tid, stævne, placering, dato);
+    }
+
+    private void sorterSvømmere(){
+        System.out.println("Test success");
+        //TODO Step 1 Indlæse CSV filer fra junior og senior hold
+        //TODO Step 2 Vælge hvilket hold du vil sortere (senior eller junior)
+        //TODO Step 3 Juster koden så admin kan trykke 1 - 4 der repræsenter hver disciplin
+        //TODO Step 4 Brugeren skal vælge hvilken disciplin de vil sortere
+        //TODO Step 5 Sætte en limiter for at foreach loopen ikke overskrider værdien 5, så den stopper efter værdien 5.
+        //TODO Step 6 Vise top 5 svømmere for den ønskede disciplin
+
     }
 
     private void visResultater() {
