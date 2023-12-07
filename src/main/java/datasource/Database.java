@@ -6,6 +6,8 @@ import domain.Resultat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import betalingAfKontigent.*;
+
 public class Database {
     Random random = new Random();
     Date date = new Date();
@@ -59,9 +61,9 @@ public class Database {
 
     }
 
-    public void redigereMedlem(int medlemsnummer,String fornavn, String efternavm, String mail, String adresse, String by, char medlemstype, char aktivitetsform){
-        for (Medlem medlem: medlemArrayList){
-            if (medlem.getMedlemsnummer()== medlemsnummer){
+    public void redigereMedlem(int medlemsnummer, String fornavn, String efternavm, String mail, String adresse, String by, char medlemstype, char aktivitetsform) {
+        for (Medlem medlem : medlemArrayList) {
+            if (medlem.getMedlemsnummer() == medlemsnummer) {
                 medlem.setFornavn(fornavn);
                 medlem.setEfternavn(efternavm);
                 medlem.setMail(mail);
@@ -87,10 +89,10 @@ public class Database {
         }
     }
 
-    public void loadFromResultatFile(){
+    public void loadFromResultatFile() {
         ArrayList<Resultat> loadResultatList;
-        loadResultatList=fileHandler.indlæsFraResultatCSVFil();
-        if (loadResultatList!= null){
+        loadResultatList = fileHandler.indlæsFraResultatCSVFil();
+        if (loadResultatList != null) {
             resultater.addAll(loadResultatList);
         }
     }
@@ -108,7 +110,7 @@ public class Database {
         }
     }
 
-    public void fjernMedlememer(int søgeMedlemsnummer){
+    public void fjernMedlememer(int søgeMedlemsnummer) {
         medlemArrayList.removeIf(medlem -> søgeMedlemsnummer == medlem.getMedlemsnummer());
 
     }
@@ -125,5 +127,51 @@ public class Database {
     public ArrayList getResultater() {
         return resultater;
     }
+
+    public int årligJuniorBetaling(int betaling, int medlemsnummer) {
+        int restBeløb = 0;
+        for (Medlem medlem : medlemArrayList) {
+            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() < 18 && medlem.getMedlemstype()!='P') {
+                JuniorBetaling juniorBetaling = new JuniorBetaling(betaling);
+                restBeløb = juniorBetaling.rest();
+            }
+        }
+        return restBeløb;
+    }
+
+    public int årligSeniorBetaling(int betaling, int medlemsnummer) {
+        int restBeløb = 0;
+        for (Medlem medlem : medlemArrayList) {
+            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() >= 18 && medlem.getMedlemstype()!='P') {
+                SeniorBetaling seniorBetaling = new SeniorBetaling(betaling);
+                restBeløb = seniorBetaling.rest();
+            }
+        }
+        return restBeløb;
+    }
+
+    public int årligOver60Betaling(int betaling, int medlemsnummer) {
+        int restBeløb = 0;
+        for (Medlem medlem : medlemArrayList) {
+            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() >= 60 && medlem.getMedlemstype()!='P') {
+                Over60 over60 = new Over60(betaling);
+                restBeløb = over60.rest();
+            }
+        }
+        return restBeløb;
+    }
+
+    public int årligPassivBetaling(int betaling, int medlemsnummer) {
+        int restBeløb = 0;
+        for (Medlem medlem : medlemArrayList) {
+            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getMedlemstype() == 'P') {
+                PassivMedlem passivMedlem = new PassivMedlem(betaling);
+                restBeløb = passivMedlem.rest();
+            }
+        }
+        return restBeløb;
+    }
+
+
 }
 

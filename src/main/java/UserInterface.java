@@ -94,6 +94,7 @@ public class UserInterface {
                 case 5 -> visResultater();
                 case 6 -> fjernmedlemmer();
                 case 7 -> redigeremedlemmer();
+                case 8 -> kontigentBetaling();
                 case 9 -> stopProgrammet();
 
             }
@@ -150,6 +151,7 @@ public class UserInterface {
                 5. Vis resultater
                 6. Fjern et medlem
                 7. Redigerer stamoplysninnger.
+                8. Betaling af kontigent
                 9. Afslut programmet
                                 
                 """);
@@ -534,5 +536,68 @@ public class UserInterface {
     private void visResultater() {
         System.out.println(medlemController.getResultater());
     }
+
+    private void kontigentBetaling(){
+        int choice=0;
+        System.out.println("""
+                1. Aktiv medlem
+                2. Passiv medlem
+                """);
+        choice=Integer.parseInt(input.nextLine());
+        switch (choice){
+            case 1 -> aktivBetaling();
+            case 2 -> passivBetaling();
+        }
+    }
+
+    private void aktivBetaling(){
+        int choice;
+        System.out.println("""
+                er du:
+                1. junior svømmer
+                2. senior svømmer
+                3. over 60
+                """);
+        choice=Integer.parseInt(input.nextLine());
+        switch (choice){
+            case 1-> juniorBetaling();
+            case 2 -> seniorBetaling();
+            case 3 -> over60();
+        }
+    }
+
+    private void passivBetaling(){
+        System.out.println("indtast betaling");
+        int betaling = Integer.parseInt(input.nextLine());
+        System.out.println("indtast medlemsnummer");
+        medlemsnummer=Integer.parseInt(input.nextLine());
+        System.out.println("Restbeløb: " + medlemController.passiv(betaling, medlemsnummer));
+    }
+
+    private void juniorBetaling(){
+        System.out.println("indtast betaling");
+        int betaling = Integer.parseInt(input.nextLine());
+        System.out.println("indtast medlemsnummer");
+        medlemsnummer=Integer.parseInt(input.nextLine());
+        System.out.println("Restbeløb: " + medlemController.juniorBetaling(betaling, medlemsnummer));
+    }
+
+    private void seniorBetaling(){
+        System.out.println("indtast betaling");
+        int betaling = Integer.parseInt(input.nextLine());
+        System.out.println("indtast medlemsnummer");
+        medlemsnummer=Integer.parseInt(input.nextLine());
+        System.out.println("Restbeløb: " + medlemController.seniorBetaling(betaling, medlemsnummer));
+
+    }
+
+    private void over60(){
+        System.out.println("indtast betaling");
+        int betaling = Integer.parseInt(input.nextLine());
+        System.out.println("indtast medlemsnummer");
+        medlemsnummer=Integer.parseInt(input.nextLine());
+        System.out.println("Restbeløb: " + medlemController.over60Betaling(betaling, medlemsnummer));
+    }
+
 }
 

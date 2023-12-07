@@ -74,5 +74,18 @@ public class MedlemController {
         }
         return eksistere;
     }
+
+    public int juniorBetaling(int betaling,int medlemsnummer){
+        return db.årligJuniorBetaling(betaling,medlemsnummer);
+    }
+    public int seniorBetaling(int betaling,int medlemsnummer){
+        return db.årligSeniorBetaling(betaling,medlemsnummer);
+    }
+    public int over60Betaling(int betaling,int medlemsnummer){
+        return db.årligOver60Betaling(betaling,medlemsnummer);
+    }
+    public int passiv(int betaling,int medlemsnummer){
+        return db.årligPassivBetaling(betaling,medlemsnummer);
+    }
 }
 
