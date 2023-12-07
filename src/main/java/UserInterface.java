@@ -1,9 +1,7 @@
 import domain.Medlem;
 import domain.MedlemController;
-import domain.Resultat;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -44,6 +42,8 @@ public class UserInterface {
         System.out.println("Velkommen til Delfinen!");
         medlemController.loadFromFile();
         medlemController.loadFromResultatFile();
+        medlemController.loadFromJuniorFile();
+        medlemController.loadFromSenior();
         do {
             /*
             System.out.println("""
@@ -90,7 +90,7 @@ public class UserInterface {
                 case 2 -> visMedlemmer();
                 case 3 -> søgEfterMedlem();
                 case 4 -> registrerResultat();
-                case 5 -> visResultater();
+                case 5 -> resultater();
                 case 6 -> fjernmedlemmer();
                 case 7 -> redigeremedlemmer();
                 case 8 -> kontigentBetaling();
@@ -102,43 +102,6 @@ public class UserInterface {
         } while (isRunning);
     }
 
-/*    private boolean formand(int brugerInput) {
-        int KODE = 432196;
-        brugerInput = 0;
-        if (brugerInput == KODE) {
-            return true;
-            int userChoice1;
-            userChoice1 = Integer.parseInt(input.nextLine());
-            switch (userChoice1) {
-
-            }
-        } else
-            return false;
-    }
-
-
-    private boolean træner(int brugerInput) {
-        int KODE = 246896;
-        brugerInput = 0;
-        while (true) {
-            if (brugerInput == KODE) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    private boolean kasserer(int brugerInput) {
-        int KODE = 135796;
-        while (true) {
-            if (brugerInput == KODE) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }*/
 
     private void velkomst() {
 
@@ -434,28 +397,24 @@ public class UserInterface {
     }
 
 
-    private void stopProgrammet() {
-        System.out.println("Programmet er hermed stoppet");
-        medlemController.exit();
-        isRunning = false;
-    }
+
 
     private void registrerResultat() {
-            boolean firstLoop = true;
+        boolean firstLoop = true;
         while (firstLoop) {
             System.out.print("""
                     indtast medlemsnummer\s""");
             try {
                 medlemsnummer = Integer.parseInt(input.nextLine());
-                if (medlemController.tjeckOmmedlemErIListe(medlemsnummer)){
-                    firstLoop=false;
-                }else {
+                if (medlemController.tjeckOmmedlemErIListe(medlemsnummer)) {
+                    firstLoop = false;
+                } else {
                     System.out.println("eksisterer ikke");
                 }
                /* if (medlemController.visMedlemmer().contains(medlemsnummer)){
                     firstLoop=false;
                 }*/
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("indtast tal");
             }
 
@@ -532,8 +491,34 @@ public class UserInterface {
         medlemController.resultat(medlemsnummer, disciplin, tid, stævne, placering, dato);
     }
 
-    private void sorterSvømmere(){
-        System.out.println("Test success");
+    private void resultater() {
+        boolean run = true;
+        while (run) {
+
+            System.out.println("""
+                    1. Alle resultater
+                    2. Junior hold
+                    3. Senior hold
+                    """);
+            String choice = input.nextLine();
+            switch (choice) {
+                case "1" -> {
+                    visResultater();
+                    run = false;
+                }
+                case "2" -> {
+                    System.out.println(medlemController.sorterJuniorResultater());
+                    run = false;
+                }
+                case "3" -> {
+                    System.out.println(medlemController.sorterSeniorResultater());
+                    run = false;
+                }
+                default -> {
+                    System.out.println("Prøv igen");
+                }
+            }
+        }
         //TODO Step 1 Indlæse CSV filer fra junior og senior hold
         //TODO Step 2 Vælge hvilket hold du vil sortere (senior eller junior)
         //TODO Step 3 Juster koden så admin kan trykke 1 - 4 der repræsenter hver disciplin
@@ -545,6 +530,26 @@ public class UserInterface {
 
     private void visResultater() {
         System.out.println(medlemController.getResultater());
+    }
+
+    public void sorterJuniorResultater() {
+        int choice = 0;
+        System.out.println("""
+                Hvilke resultater vil du se
+                """);
+        System.out.println("""
+                1. Top fem svømme resultater
+                2. Top fem crwal resultater
+                3. Top fem butterfly resultater
+                4. Top fem rygcrwal resultater
+                5. Top fem brystsvømnings resultater
+                """);
+
+        /*switch (choice){
+            case 1 ->
+        }*/
+
+        medlemController.sorterJuniorResultater();
     }
 
     private void kontigentBetaling(){
@@ -560,6 +565,10 @@ public class UserInterface {
         }
     }
 
+
+    //TODO Lav en CSV-Fil til de medlemmer som er i restance
+    //TODO Lav en CSV-Fil til de medlemmer der ikke er i restance
+    //TODO Lav en algoritme som finder frem til den forventde indtægt årligt
     private void aktivBetaling(){
         int choice;
         System.out.println("""
@@ -609,5 +618,10 @@ public class UserInterface {
         System.out.println("Restbeløb: " + medlemController.over60Betaling(betaling, medlemsnummer));
     }
 
+    private void stopProgrammet() {
+        System.out.println("Programmet er hermed stoppet");
+        medlemController.exit();
+        isRunning = false;
+    }
 }
 

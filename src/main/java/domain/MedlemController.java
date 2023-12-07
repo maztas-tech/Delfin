@@ -57,7 +57,7 @@ public class MedlemController {
         db.resultat(medlemsnummer, disciplin, tid, stævne, placering, dato);
     }
 
-    public ArrayList getResultater () {
+    public ArrayList <Resultat> getResultater () {
         return db.getResultater();
     }
     public void loadFromResultatFile () {
@@ -86,6 +86,22 @@ public class MedlemController {
     }
     public int passiv(int betaling,int medlemsnummer){
         return db.årligPassivBetaling(betaling,medlemsnummer);
+    }
+
+    public void loadFromJuniorFile(){
+        db.loadFromJuniorFile();
+    }
+
+    public void loadFromSenior(){
+        db.loadFromSeniorFile();
+    }
+
+    public ArrayList sorterJuniorResultater(){
+       return db.sorterTop5JuniorHold();
+    }
+
+    public ArrayList sorterSeniorResultater(){
+        return db.sorterTop5SeniorHold();
     }
 }
 

@@ -1,5 +1,7 @@
 package datasource;
 
+import comparator.placeringComparator;
+import comparator.tidComparator;
 import domain.Medlem;
 import domain.Resultat;
 
@@ -7,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import betalingAfKontigent.*;
+
+import javax.swing.*;
 
 public class Database {
     Random random = new Random();
@@ -82,7 +86,7 @@ public class Database {
         loadedMedlemArrayList = fileHandler.indlæsFraCSVFil();
         if (loadedMedlemArrayList != null) {
             //medlemArrayList.clear();
-            medlemArrayList.addAll(loadedMedlemArrayList);
+            medlemArrayList = loadedMedlemArrayList;
             //loadedMedlemArrayList.clear();
         } else {
             System.out.println("Ingen gemte medlemmer.");
@@ -93,7 +97,23 @@ public class Database {
         ArrayList<Resultat> loadResultatList;
         loadResultatList = fileHandler.indlæsFraResultatCSVFil();
         if (loadResultatList != null) {
-            resultater.addAll(loadResultatList);
+            resultater = loadResultatList;
+        }
+    }
+
+    public void loadFromJuniorFile() {
+        ArrayList<Medlem> loadJuniorMedlem;
+        loadJuniorMedlem = fileHandler.indlæsFraJuniorCSVFil();
+        if (loadJuniorMedlem != null) {
+            medlemArrayList = loadJuniorMedlem;
+        }
+    }
+
+    public void loadFromSeniorFile() {
+        ArrayList<Medlem> loadSeniorMedlem;
+        loadSeniorMedlem = fileHandler.indlæsFraSeniorCSVFil();
+        if (loadSeniorMedlem != null) {
+            medlemArrayList = loadSeniorMedlem;
         }
     }
 
@@ -131,7 +151,7 @@ public class Database {
     public int årligJuniorBetaling(int betaling, int medlemsnummer) {
         int restBeløb = 0;
         for (Medlem medlem : medlemArrayList) {
-            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() < 18 && medlem.getMedlemstype()!='P') {
+            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() < 18 && medlem.getMedlemstype() != 'P') {
                 JuniorBetaling juniorBetaling = new JuniorBetaling(betaling);
                 restBeløb = juniorBetaling.rest();
             }
@@ -142,7 +162,7 @@ public class Database {
     public int årligSeniorBetaling(int betaling, int medlemsnummer) {
         int restBeløb = 0;
         for (Medlem medlem : medlemArrayList) {
-            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() >= 18 && medlem.getMedlemstype()!='P') {
+            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() >= 18 && medlem.getMedlemstype() != 'P') {
                 SeniorBetaling seniorBetaling = new SeniorBetaling(betaling);
                 restBeløb = seniorBetaling.rest();
             }
@@ -153,7 +173,7 @@ public class Database {
     public int årligOver60Betaling(int betaling, int medlemsnummer) {
         int restBeløb = 0;
         for (Medlem medlem : medlemArrayList) {
-            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() >= 60 && medlem.getMedlemstype()!='P') {
+            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() >= 60 && medlem.getMedlemstype() != 'P') {
                 Over60 over60 = new Over60(betaling);
                 restBeløb = over60.rest();
             }
@@ -172,6 +192,40 @@ public class Database {
         return restBeløb;
     }
 
+    public ArrayList sorterTop5JuniorHold() {
+        ArrayList<Medlem> juniorSvømmere = fileHandler.indlæsFraJuniorCSVFil();
+        ArrayList<Resultat> tidJuniorSvømmere = new ArrayList<>();
+        ArrayList<Resultat> topFemResultater = new ArrayList<>();
+        for (Medlem medlem : juniorSvømmere) {
+            for (Resultat resultat : resultater) {
+                if (medlem.getMedlemsnummer() == resultat.getMedlemsnummer()) {
+                    tidJuniorSvømmere.add(resultat);
+                }
+            }
+        }
+        Collections.sort(tidJuniorSvømmere, new placeringComparator().thenComparing(new tidComparator()).reversed());
+        for (int i = 0; i < Math.min(5, tidJuniorSvømmere.size()); i++) {
+            topFemResultater.add(tidJuniorSvømmere.get(i));
+        }
+        return topFemResultater;
+    }
 
+    public ArrayList sorterTop5SeniorHold() {
+        ArrayList<Medlem> seniorSvømmere = fileHandler.indlæsFraSeniorCSVFil();
+        ArrayList<Resultat> tidSeniorSvømmere = new ArrayList<>();
+        ArrayList<Resultat> topFemResultater = new ArrayList<>();
+        for (Medlem medlem : seniorSvømmere) {
+            for (Resultat resultat : resultater) {
+                if (medlem.getMedlemsnummer() == resultat.getMedlemsnummer()) {
+                    tidSeniorSvømmere.add(resultat);
+                }
+            }
+            Collections.sort(tidSeniorSvømmere, new placeringComparator().thenComparing(new tidComparator()).reversed());
+            for (int i = 0; i <Math.min(5, tidSeniorSvømmere.size()); i++) {
+                topFemResultater.add(tidSeniorSvømmere.get(i));
+            }
+        }
+        return topFemResultater;
+    }
 }
 

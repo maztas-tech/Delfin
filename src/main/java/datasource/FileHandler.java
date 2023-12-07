@@ -33,7 +33,7 @@ public class FileHandler {
 
             }
         } catch (FileNotFoundException fnfe) {
-            System.out.println("Filen eksisterer ikke!");
+            fnfe.printStackTrace();
         }
     }
 
@@ -43,13 +43,11 @@ public class FileHandler {
             for (Medlem medlem : medlemArrayList) {
                 if (medlem.getAlder() < 18 && medlem.getAktivitetsform() == 'K') {
                     juniorOutput.println(medlem);
-                } else {
-                    System.out.println("Ingen under 18");
                 }
             }
 
         } catch (FileNotFoundException fnfe) {
-            System.out.println("Filen eksisterer ikke!");
+            fnfe.printStackTrace();
         }
     }
 
@@ -59,8 +57,6 @@ public class FileHandler {
             for (Medlem medlem : medlemArrayList) {
                 if (medlem.getAlder() >= 18 && medlem.getAktivitetsform() == 'K') {
                     seniorOutput.println(medlem);
-                } else {
-                    System.out.println("Ingen over 18!");
                 }
             }
         } catch (FileNotFoundException fnfe) {
