@@ -35,6 +35,10 @@ public class Resultat {
         return placering;
     }
 
+    public int getMedlemsnummer(){
+        return medlemsnummer;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
