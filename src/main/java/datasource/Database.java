@@ -151,7 +151,7 @@ public class Database {
     public int årligJuniorBetaling(int betaling, int medlemsnummer) {
         int restBeløb = 0;
         for (Medlem medlem : medlemArrayList) {
-            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() < 18 && medlem.getMedlemstype() != 'P') {
+            if (medlem.getMedlemsnummer() == medlemsnummer && medlem.getAlder() <= 17 && medlem.getMedlemstype() != 'P') {
                 JuniorBetaling juniorBetaling = new JuniorBetaling(betaling);
                 restBeløb = juniorBetaling.rest();
             }
