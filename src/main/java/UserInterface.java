@@ -1,6 +1,8 @@
+import betalingAfKontingent.Kontingent;
 import domain.Medlem;
 import domain.MedlemController;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -45,8 +47,7 @@ public class UserInterface {
         System.out.println("Velkommen til Delfinen!");
         medlemController.loadFromFile();
         medlemController.loadFromResultatFile();
-        medlemController.loadFromJuniorFile();
-        medlemController.loadFromSenior();
+        medlemController.loadFromKontigentFile();
         do {
             /*
             System.out.println("""
@@ -202,13 +203,22 @@ public class UserInterface {
             break;
         }
         while (true) {
-            System.out.print("Tilføj alder ");
+            System.out.print("""
+                    indtast fødselsdato\s""");
             try {
-                alder = Integer.parseInt(input.nextLine());
+                System.out.print("Indtast dag: ");
+                dag = Integer.parseInt(input.nextLine());
+                System.out.print("Indtast måned: ");
+                måned = Integer.parseInt(input.nextLine());
+                System.out.print("Indtast år: ");
+                år = Integer.parseInt(input.nextLine());
+
             } catch (NumberFormatException nfe) {
-                System.out.println("Skal være et tal!");
+                System.out.println("indtast dag/måned/år");
                 continue;
             }
+            char slash = '/';
+            alder = Integer.parseInt(String.valueOf(dag + slash + måned + slash + år));
             break;
         }
         while (true) {
@@ -296,6 +306,7 @@ public class UserInterface {
                 break;
             case 2:
                 //Printer Junior holdet ud på skærmen
+                medlemController.loadFromJuniorFile();
                 System.out.println("Liste af alle medlemmer i junior hold");
                 for (Medlem medlem : medlemArrayList) {
                     System.out.println("");
@@ -316,6 +327,7 @@ public class UserInterface {
                 break;
             case 3:
                 //Printer Senior holdet ud på skærmen
+                medlemController.loadFromSenior();
                 System.out.println("Senior hold");
                 for (Medlem medlem : medlemArrayList) {
                     System.out.println("");
@@ -357,7 +369,6 @@ public class UserInterface {
     private void fjernmedlemmer() {
         try {
             System.out.print("Indtast medlemsnummer: ");
-            System.out.println("Medlem er fjernet");
             medlemsnummer = Integer.parseInt(input.nextLine());
             medlemController.fjernMedlemmer(medlemsnummer);
         } catch (NumberFormatException nfe) {
@@ -498,27 +509,24 @@ public class UserInterface {
 
             System.out.println("""
                     1. Alle resultater
-                    2. Junior hold
-                    3. Senior hold
+                    2. alle Junior holds resultater
+                    3. alle Senior hold resultater
+                    4. vælg disciplin
                     """);
             String choice = input.nextLine();
             switch (choice) {
-                case "1" -> {
-                    visResultater();
-                    run = false;
-                }
-                case "2" -> {
-                    System.out.println(medlemController.sorterJuniorResultater());
-                    run = false;
-                }
-                case "3" -> {
-                    System.out.println(medlemController.sorterSeniorResultater());
-                    run = false;
-                }
-                default -> {
-                    System.out.println("Prøv igen");
-                }
+                case "1" -> visResultater();
+
+                case "2" -> sorterJuniorResultater();
+
+                case "3" -> sorterseniorResultater();
+
+                case "4" -> sorteringAfDisciplin();
+
+                default -> System.out.println("Prøv igen");
+
             }
+            run = false;
         }
         //TODO Step 1 Indlæse CSV filer fra junior og senior hold
         //TODO Step 2 Vælge hvilket hold du vil sortere (senior eller junior)
@@ -529,29 +537,82 @@ public class UserInterface {
 
     }
 
+    private void sorteringAfDisciplin() {
+
+        System.out.println("""
+                1. senior crawl
+                2. senior brystsvømning
+                3. Senior Rygsvømning
+                4. senior butterfly
+                5. Junior crawl
+                6. Junior Brystsvømning
+                7. Junior Rygsvømning
+                8. Junior Butterfly
+                """);
+        String choice = input.nextLine();
+        switch (choice) {
+            case "1" -> sorterSeniorCrawl();
+            case "2" -> sorterSeniorBryst();
+            case "3" -> sorterSeniorRyg();
+            case "4" -> sorterSeniorButterfly();
+            case "5" -> sorterJuniorCrawl();
+            case "6" -> sorterJuniorBryst();
+            case "7" -> sorterJuniorRyg();
+            case "8" -> sorterJuniorButterfly();
+
+        }
+    }
+
+    private void forventetKontingentBetaling() {
+        System.out.println(medlemController.getKontigentList());
+    }
+
+
+
     private void visResultater() {
         System.out.println(medlemController.getResultater());
     }
 
     public void sorterJuniorResultater() {
-        int choice = 0;
-        System.out.println("""
-                Hvilke resultater vil du se
-                """);
-        System.out.println("""
-                1. Top fem svømme resultater
-                2. Top fem crwal resultater
-                3. Top fem butterfly resultater
-                4. Top fem rygcrwal resultater
-                5. Top fem brystsvømnings resultater
-                """);
-
-        /*switch (choice){
-            case 1 ->
-        }*/
-
-        medlemController.sorterJuniorResultater();
+        System.out.println(medlemController.sorterJuniorResultater());
     }
+
+    public void sorterseniorResultater() {
+        System.out.println(medlemController.sorterSeniorResultater());
+    }
+
+    public void sorterSeniorCrawl() {
+        System.out.println(medlemController.sorterSeniorCrawl());
+    }
+
+    public void sorterSeniorBryst() {
+        System.out.println(medlemController.sorterSeniorBryst());
+    }
+
+    public void sorterSeniorRyg() {
+        System.out.println(medlemController.sorterSeniorRyg());
+    }
+
+    public void sorterSeniorButterfly() {
+        System.out.println(medlemController.sorterSeniorButterfly());
+    }
+
+    public void sorterJuniorButterfly() {
+        System.out.println(medlemController.sorterJuniorButterfly());
+    }
+
+    public void sorterJuniorCrawl() {
+        System.out.println(medlemController.sorterJuniorCrawl());
+    }
+    public void sorterJuniorRyg() {
+        System.out.println(medlemController.sorterJuniorRyg());
+    }
+
+    public void sorterJuniorBryst() {
+        System.out.println(medlemController.sorterJuniorBryst());
+    }
+
+
 
     private void kontigentBetaling() {
         int choice = 0;
@@ -587,17 +648,17 @@ public class UserInterface {
     }
 
     private void passivBetaling() {
-        int beløb = 0;
         System.out.println("indtast medlemsnummer");
         medlemsnummer = Integer.parseInt(input.nextLine());
         for (Medlem medlem : medlemController.visMedlemmer()) {
-            if (medlem.getMedlemstype() != 'P') {
+            if (medlemsnummer == medlem.getMedlemsnummer() && medlem.getMedlemstype() != 'P') {
                 System.out.println("Dette er et aktivt medlem.");
                 break;
-            }else {
+            } else {
                 System.out.println("indtast betaling");
                 int betaling = Integer.parseInt(input.nextLine());
                 System.out.println("Restbeløb: " + medlemController.passiv(betaling, medlemsnummer));
+                break;
             }
         }
     }
@@ -606,13 +667,14 @@ public class UserInterface {
         System.out.println("indtast medlemsnummer");
         medlemsnummer = Integer.parseInt(input.nextLine());
         for (Medlem medlem : medlemController.visMedlemmer()) {
-            if (medlem.getMedlemstype() == 'P') {
+            if (medlemsnummer == medlem.getMedlemsnummer() && medlem.getMedlemstype() == 'P') {
                 System.out.println("Dette er et passivt medlem.");
                 break;
-            }else {
+            } else {
                 System.out.println("indtast betaling");
                 int betaling = Integer.parseInt(input.nextLine());
                 System.out.println("Restbeløb: " + medlemController.juniorBetaling(betaling, medlemsnummer));
+                break;
             }
         }
     }
@@ -621,13 +683,13 @@ public class UserInterface {
         System.out.println("indtast medlemsnummer");
         medlemsnummer = Integer.parseInt(input.nextLine());
         for (Medlem medlem : medlemController.visMedlemmer()) {
-            if (medlem.getMedlemstype() == 'P') {
+            if (medlemsnummer == medlem.getMedlemsnummer() && medlem.getMedlemstype() == 'P') {
                 System.out.println("Dette er en passiv medlem.");
-                break;
             } else {
                 System.out.println("indtast betaling");
                 int betaling = Integer.parseInt(input.nextLine());
                 System.out.println("Restbeløb: " + medlemController.seniorBetaling(betaling, medlemsnummer));
+                break;
             }
         }
     }
@@ -635,15 +697,15 @@ public class UserInterface {
     private void over60() {
         System.out.println("Indtast medlemsnummer");
         medlemsnummer = Integer.parseInt(input.nextLine());
-
         for (Medlem medlem : medlemController.visMedlemmer()) {
-            if (medlem.getMedlemstype() == 'P') {
+            if (medlemsnummer == medlem.getMedlemsnummer() && medlem.getMedlemstype() == 'P') {
                 System.out.println("Dette er en passiv medlem.");
                 break;
-            }else {
+            } else {
                 System.out.println("indtast betaling");
                 int betaling = Integer.parseInt(input.nextLine());
                 System.out.println("Restbeløb: " + medlemController.over60Betaling(betaling, medlemsnummer));
+                break;
             }
         }
     }

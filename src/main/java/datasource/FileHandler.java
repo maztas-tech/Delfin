@@ -1,5 +1,6 @@
 package datasource;
 
+import betalingAfKontingent.Kontingent;
 import domain.Medlem;
 import domain.Resultat;
 
@@ -17,6 +18,7 @@ public class FileHandler {
     private File juniorFile = new File("juniorHoldet.csv");
     private File seniorFile = new File("seniorHoldet.csv");
     private File resultatFile = new File("resultater.csv");
+    private File kontigentsFil = new File("kontigent.csv");
 
 
     //TODO: Udskriv medlemsID til en csv-fil.
@@ -73,6 +75,17 @@ public class FileHandler {
                 } else {
                     System.out.println("Ingen resultater i klubben");
                 }
+            }
+        } catch (FileNotFoundException fnfe) {
+            fnfe.printStackTrace();
+        }
+    }
+
+    public void indsætKontigentBetaling(ArrayList<Kontingent> kontigentList) {
+        try {
+            PrintStream output = new PrintStream(kontigentsFil);
+            for (Kontingent kontigent : kontigentList) {
+                output.println(kontigent);
             }
         } catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
@@ -173,8 +186,6 @@ public class FileHandler {
 
                     Medlem member = new Medlem(fornavn, efternavn, adresse, by, mail, køn, alder, medlemsnummer, restance, aktivitetsform, medlemstype);
                     medlemArrayList.add(member);
-                } else {
-                    System.out.println("Længden skal være 11!");
                 }
             }
             sc.close();
@@ -211,6 +222,31 @@ public class FileHandler {
             ioe.printStackTrace();
         }
         return resultatList;
+    }
+
+    public ArrayList<Kontingent> indlæsFraKontigentCSVFil() {
+
+        ArrayList<Kontingent> kontigentList = new ArrayList<>();
+        try {
+            Scanner sc = new Scanner(kontigentsFil);
+
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] antalAttributes = line.split(";");
+                if (antalAttributes.length == 2) {
+                    int betaling = Integer.parseInt(antalAttributes[0].trim());
+                    int medlemsnummer = Integer.parseInt(antalAttributes[1].trim());
+                    int rest = Integer.parseInt(antalAttributes[2].trim());
+
+                    Kontingent kontigent = new Kontingent(betaling, medlemsnummer, rest);
+                    kontigentList.add(kontigent);
+                }
+            }
+            sc.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return kontigentList;
     }
 
 }

@@ -39,6 +39,10 @@ public class Resultat {
         return medlemsnummer;
     }
 
+    public String getDisciplin(){
+        return disciplin;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

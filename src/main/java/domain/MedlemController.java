@@ -36,16 +36,17 @@ public class MedlemController {
         db.søgEfterMedlem(medlemsnummer, søgNavn);
     }
 
-    public void fjernMedlemmer ( int søgeMedlemsnummer){
+    public void fjernMedlemmer(int søgeMedlemsnummer) {
         isChanged = true;
         db.fjernMedlememer(søgeMedlemsnummer);
     }
 
-    public void redigereMedlememr ( int medlemsnummer, String fornavn, String efternavm, String mail, String
-            adresse, String by,char medlemstype, char aktivitetsform){
+    public void redigereMedlememr(int medlemsnummer, String fornavn, String efternavm, String mail, String
+            adresse, String by, char medlemstype, char aktivitetsform) {
         isChanged = true;
         db.redigereMedlem(medlemsnummer, fornavn, efternavm, mail, adresse, by, medlemstype, aktivitetsform);
     }
+
     public void exit() {
         if (isChanged == true) {
             db.gemÆndringer();
@@ -57,14 +58,15 @@ public class MedlemController {
         db.resultat(medlemsnummer, disciplin, tid, stævne, placering, dato);
     }
 
-    public ArrayList <Resultat> getResultater () {
+    public ArrayList<Resultat> getResultater() {
         return db.getResultater();
     }
-    public void loadFromResultatFile () {
+
+    public void loadFromResultatFile() {
         db.loadFromResultatFile();
     }
 
-    public boolean tjeckOmmedlemErIListe ( int medlemsnummer){
+    public boolean tjeckOmmedlemErIListe(int medlemsnummer) {
         ArrayList<Medlem> medlemArrayList = db.getMedlemmer();
         boolean eksistere = false;
         for (Medlem medlem : medlemArrayList) {
@@ -75,33 +77,80 @@ public class MedlemController {
         return eksistere;
     }
 
-    public int juniorBetaling(int betaling,int medlemsnummer){
-        return db.årligJuniorBetaling(betaling,medlemsnummer);
-    }
-    public int seniorBetaling(int betaling,int medlemsnummer){
-        return db.årligSeniorBetaling(betaling,medlemsnummer);
-    }
-    public int over60Betaling(int betaling,int medlemsnummer){
-        return db.årligOver60Betaling(betaling,medlemsnummer);
-    }
-    public int passiv(int betaling,int medlemsnummer){
-        return db.årligPassivBetaling(betaling,medlemsnummer);
+    public int juniorBetaling(int betaling, int medlemsnummer) {
+        isChanged = true;
+        return db.årligJuniorBetaling(betaling, medlemsnummer);
     }
 
-    public void loadFromJuniorFile(){
+    public int seniorBetaling(int betaling, int medlemsnummer) {
+        isChanged = true;
+        return db.årligSeniorBetaling(betaling, medlemsnummer);
+    }
+
+    public int over60Betaling(int betaling, int medlemsnummer) {
+        isChanged = true;
+        return db.årligOver60Betaling(betaling, medlemsnummer);
+    }
+
+    public int passiv(int betaling, int medlemsnummer) {
+        isChanged = true;
+        return db.årligPassivBetaling(betaling, medlemsnummer);
+    }
+
+    public void loadFromJuniorFile() {
         db.loadFromJuniorFile();
     }
 
-    public void loadFromSenior(){
+    public void loadFromSenior() {
         db.loadFromSeniorFile();
     }
 
-    public ArrayList sorterJuniorResultater(){
-       return db.sorterTop5JuniorHold();
+    public ArrayList sorterJuniorResultater() {
+        return db.sorterTop5JuniorHold();
     }
 
-    public ArrayList sorterSeniorResultater(){
+    public ArrayList sorterSeniorResultater() {
         return db.sorterTop5SeniorHold();
+    }
+
+    public ArrayList sorterSeniorCrawl() {
+        return db.sorterTop5SeniorHoldCrawl();
+    }
+
+    public ArrayList sorterSeniorBryst() {
+        return db.sorterTop5SeniorHoldBryst();
+    }
+
+    public ArrayList sorterSeniorRyg() {
+        return db.sorterTop5SeniorHoldRyg();
+    }
+
+    public ArrayList sorterSeniorButterfly() {
+        return db.sorterTop5SeniorHoldButterfly();
+    }
+
+    public void loadFromKontigentFile() {
+        db.loadFromKontigentFile();
+    }
+
+   public ArrayList sorterJuniorCrawl(){
+        return db.sorterTop5JuniorHoldCrawl();
+   }
+
+    public ArrayList sorterJuniorBryst(){
+        return db.sorterTop5JuniorHoldBryst();
+    }
+
+    public ArrayList sorterJuniorRyg(){
+        return db.sorterTop5JuniorHoldRyg();
+    }
+
+    public ArrayList sorterJuniorButterfly(){
+       return db.sorterTop5JuniorHoldButterfly();
+    }
+
+    public ArrayList getKontigentList(){
+        return db.getKontingentList();
     }
 }
 
