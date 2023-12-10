@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class MedlemController {
     Database db = new Database();
-    boolean isChanged = false;
+   private boolean isChanged = false;
 
     public void registreMedlemmer(String fornavn, String efternavn, String adresse,
                                   String by, String mail, char køn,

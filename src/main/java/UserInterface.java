@@ -14,10 +14,6 @@ public class UserInterface {
 
     private boolean isRunning = true;
     private int userChoice;
-
-    private int brugerKode;
-    private int brugerValg;
-    private boolean memberVerified = true;
     private String fornavn;
     private String efternavn;
     private String adresse;
@@ -392,9 +388,6 @@ public class UserInterface {
                 } else {
                     System.out.println("eksisterer ikke");
                 }
-               /* if (medlemController.visMedlemmer().contains(medlemsnummer)){
-                    firstLoop=false;
-                }*/
             } catch (Exception e) {
                 System.out.println("indtast tal");
             }
