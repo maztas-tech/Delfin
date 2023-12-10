@@ -49,37 +49,7 @@ public class UserInterface {
         medlemController.loadFromResultatFile();
         medlemController.loadFromKontigentFile();
         do {
-            /*
-            System.out.println("""
-                    Er du:
-                    1. Formand.
-                    2. Træner.
-                    3. Kasserer.
-                    """);
 
-            try {
-                brugerValg = Integer.parseInt(input.nextLine());
-            } catch (InputMismatchException | NumberFormatException ime) {
-                System.out.println("Skal være et tal!");
-            }
-
-            switch (brugerValg) {
-                case 1:
-                    formand(brugerKode);
-                    System.out.println("Hello formand!");
-
-                    break;
-                case 2:
-                    træner(brugerKode);
-                    System.out.println("Hello træner!");
-                    break;
-                case 3:
-                    kasserer(brugerKode);
-                    System.out.println("Hello kasserer");
-                    break;
-
-            }
-            */
             velkomst();
 
             try {
@@ -98,7 +68,8 @@ public class UserInterface {
                 case 6 -> fjernmedlemmer();
                 case 7 -> redigeremedlemmer();
                 case 8 -> kontigentBetaling();
-                case 9 -> stopProgrammet();
+                case 9 -> forventetKontingentBetaling();
+                case 10 -> stopProgrammet();
 
             }
 
@@ -117,8 +88,9 @@ public class UserInterface {
                 5. Vis resultater
                 6. Fjern et medlem
                 7. Redigerer stamoplysninnger.
-                8. Betaling af kontigent
-                9. Afslut programmet
+                8. Betaling af kontingent
+                9. Forventet årlig indtægt
+                10. Afslut programmet
                                 
                 """);
     }
@@ -346,10 +318,7 @@ public class UserInterface {
                     }
                 }
                 break;
-
         }
-
-
     }
 
 
